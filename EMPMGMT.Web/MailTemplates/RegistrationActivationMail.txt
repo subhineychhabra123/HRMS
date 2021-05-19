@@ -1,0 +1,20 @@
+<p>Dear {Registration_User_Name},</p><br /><br />
+
+<p>Thank you for registering on EMPMGMT DEPLOYMENT. You are being provided trial access of the application based upon your request to use our system. Please find your account information to login into the system :<br /><br />
+
+
+
+Module(s):{Access_For_Deployment_Module} <br />
+Module(s) access type: {Modules_Access_Type} <br />
+Module(s) valid from {Module_Access_Valid_From}  till   {Module_Access_Valid_Till}<br />
+UserName: {Account_Login_UserId} <br />
+
+Please click the link below to activate your account.</p><br /><br />
+<a href="{Account_Login_URL}"> {Account_Login_URL} </a>
+<br /><br />
+Comment: {Comment_By_Admin}
+
+<p></p>
+
+<p>Regards,</p><br />
+<P>Technical Team</P>

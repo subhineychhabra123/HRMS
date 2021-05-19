@@ -1,0 +1,369 @@
+﻿@model EMPMGMT.Web.ViewModels.TimeSheetVM
+@using EMPMGMT.Utility
+@{
+    ViewBag.Title = "Time Sheet";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+@using EMPMGMT.Utility;
+@section scripts {
+
+    <script src="@Url.Content("~/Scripts/Popup.js")"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+    <script src="~/Scripts/AutoComplete.js"></script>
+
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.TimeSheet.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            //debugger;            
+            //var UrlMain = window.location.href.split('?');
+            //if (UrlMain.length > 1) {
+            //    var Data = UrlMain[1];
+            //    if (Data == "Length=1") {
+            //        window.location.href = UrlMain[0];
+            //        $('#CreateTimeSheet').css('display', 'block');
+            //        $('#ddlActionItemId').next('.required').html("Action Item Assigned to You!");
+                  
+            //    }
+            //    else { $('#CreateTimeSheet').css('display', 'none'); }
+            //}
+            //else { $('#CreateTimeSheet').css('display', 'none'); }
+
+
+            //function Success(data) {
+            //    debugger;
+            //    alert(data);
+            //    //if (data.ErrorStatus == 1) {
+            //    //    $('#CreateTimeSheet').show();
+            //    //    $('#ddlActionItemId').next('.required').html("Action Item Assigned to You!");
+            //    //    return false;
+            //    //}
+            //}
+            //function Failure(data) {
+            //    debugger;
+            //    alert(data);
+            //    //if (data.ErrorStatus == 1) {
+            //    //    $('#CreateTimeSheet').show();
+            //    //    $('#ddlActionItemId').next('.required').html("Action Item Assigned to You!");
+            //    //    return false;
+            //    //}
+            //}
+        });
+        //function Success(data) {
+        //    debugger;
+        //    alert(data);
+        //    //if (data.ErrorStatus == 1) {
+        //    //    $('#CreateTimeSheet').show();
+        //    //    $('#ddlActionItemId').next('.required').html("Action Item Assigned to You!");
+        //    //    return false;
+        //    //}
+        //}
+        //function Failure(data) {
+        //    debugger;
+        //    alert(data);
+        //    //if (data.ErrorStatus == 1) {
+        //    //    $('#CreateTimeSheet').show();
+        //    //    $('#ddlActionItemId').next('.required').html("Action Item Assigned to You!");
+        //    //    return false;
+        //    //}
+        //}
+
+        validations = function () {
+            if ($('#ddlProjectId').val() == 0 || $('#ddlProjectId').val()==null) {
+                $('#ddlProjectId').focus();
+                $('#ddlProjectId').next('.required').html("Project is required");
+                return false;
+            }
+            else { $('#ddlProjectId').next('.required').html(''); }
+            if ($('#ddlActionItemId').val() == 0) {
+                $('#ddlActionItemId').focus();
+                $('#ddlActionItemId').next('.required').html("Task Name is required");
+                return false;
+            }
+            else { $('#ddlActionItemId').next('.required').html(''); }
+            if ($('#EntryDate').val() == '') {
+                $('#EntryDate').focus();
+                $('#EntryDate').next('.required').html("The EntryDate field is required");
+                return false;
+            }
+            else { $('#EntryDate').next('.required').html(''); }
+            if ($('#ddlTimeId').val() == '' || $('#ddlTimeId').val() == '0') {
+                $('#ddlTimeId').focus();
+                $('#ddlTimeId').next('.required').html(" Time is required");
+                return false;
+            }
+            else { $('#ddlTimeId').next('.required').html(""); }
+        }
+
+    </script>
+    <style type="text/css">
+
+     /*[class^='col-'] {
+    padding:0;
+    }
+    [class^='col-'] + [class^='col-'] {
+    padding-left: 25px;
+    }*/
+    </style>
+
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ManageTimeSheet.pageLoad();
+    }
+
+
+
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+   
+
+
+    <div class="col-md-6 col-xs-8 ">
+        @* <div class="input-group input-search form-group">
+                @*<input type="text" placeholder="Search..." id="txtsearch" data-bind="value: SearchText" name="q" class="form-control _SearchTxt">
+                <span class="input-group-btn">
+                    <button type="submit" class="btn btn-default" data-bind="    click: FilteredData"><i class="fa fa-search"></i></button>
+                </span>
+            </div>*@
+
+    </div>
+    <div class="col-md-6 col-xs-4">
+
+        <a  data-toggle="modal" data-target="#CreateTimeSheet"  class="btn btn-primary pull-right permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_CREATE)" data-bind="click: $root.AddTimeSheet" title="Create Time Sheet">Create</a>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive dataTables_wrapper">
+                        <table summary="Manage TimeSheet Dashboard" class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                            <thead>
+                                <tr class="primary">
+                                    <!-- ko foreach:TableHeaders   -->
+                                    <th class="sorting" scope="col" data-bind="html: ColumnText, click: Sort, css: SortOrder"></th>
+                                    <!-- /ko -->
+                                    <th scope="col" class="actionLink">Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody data-bind="template: { name: 'TimeSheetDashboardTemplate',foreach: ManageTimeSheet }">
+                            </tbody>
+
+                            <tr data-bind="visible: ManageTimeSheet().length == 0 && !IsInitialLoading()" style="display: none;">
+                                <td colspan="4"><b>No Record Found</b></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div class="_TimeSheetPager "></div>
+            </section>
+        </div>
+    </div>
+
+
+
+   
+
+
+
+    
+    <div class="modal fade" id="CreateTimeSheet" tabindex="-1" data-hideonoutsideclick="false">
+        @*  id=""  role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"*@
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" data-bind="text: TimeSheetTitle"></h4>
+                
+                     @Html.HiddenFor(model => model.TimeSheetId, new { id = "hdnTimeSheetId" })
+                </div>
+                <div class="modal-body">
+                 @*  @using (Html.BeginForm("TimeSheet", "Employee", new AjaxOptions { OnSuccess = "Success", OnFailure = "Failure", UpdateTargetId = "error" }, new { @id = "ajax" }))
+                   {                   
+                    *@
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Project <span class="required">*</span></label>
+                        <div class="col-sm-9">
+                            
+                            @Html.DropDownListFor(model => model.ProjectId, new SelectList(ViewBag.Project as System.Collections.IEnumerable, "ProjectId", "ProjectName"),
+"Select a Project", new { id = "ddlProjectId", @class = "form-control", onchange = "ActionItemOnProject(this.value)" })
+                            <div class="col-sm-9 required">@Html.ValidationMessageFor(model => model.ProjectId)</div>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Action Item <span class="required">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.DropDownListFor(model => model.ActionItemId, new SelectList(ViewBag.ActionItem as System.Collections.IEnumerable, "ActionItemId", "ItemName"),
+"Select a Action Item", new { id = "ddlActionItemId", @class = "form-control _parent _child" })
+                            <div id="error" class="col-sm-9 required">@Html.ValidationMessageFor(model => model.ActionItemId)</div>
+                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Date<span class="required">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.TextBoxFor(model => model.EntryDate, new { @class = "form-control", Value = @DateTime.Now.ToString("M/d/yyyy"), id = "EntryDate" })
+                            <div class="col-sm-9 required">@Html.ValidationMessageFor(model => model.EntryDate)</div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Time Taken <span class="required">*</span></label>
+                        <div class="col-sm-9">
+                            @Html.DropDownListFor(model => model.TimeTaken, new SelectList(ViewBag.Time as System.Collections.IEnumerable, "Text", "Text"),
+"Select Time", new { id = "ddlTimeId", @class = "form-control" })
+                            <div class="col-sm-9 required">
+                                @Html.ValidationMessageFor(model => model.TimeTaken)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Comment</label>
+                        <div class="col-sm-9">
+
+                            @Html.TextAreaFor(model => model.Comment, new { @class = "form-control", style = "resize:none;", id="txtComment" })
+                            <div class="col-sm-9 required">@Html.ValidationMessageFor(model => model.Comment)</div>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-footer">
+                        <div class="col-sm-12">
+                            @*  //   <a  data-toggle="modal" class="btn btn-primary pull-right permissionbased" data-bind="click: $root.SaveTimeSheet" title="Create Time Sheet">Create</a>*@
+                            <input type="submit"   value="Save" id="btnSubmit" onclick="return validations();" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_CREATE)" class="button btn btn-primary  permissionbased _SaveTimeSheet" />
+                            <a class="btn btn-default _closeGoalWindow pull-right" data-dismiss="modal">Cancel</a>
+                        </div>
+                    </div>
+                @*   }*@
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/html" id="TimeSheetDashboardTemplate">
+        <div id="accordion">
+
+            <div class="form-control" style="cursor:pointer; border:none;" data-bind="click :DetailTImeSheet">
+                <div class="row">
+                    <div class="col-md-6 control-label">
+                        <a data-bind=" text: MonthList "></a>
+                    </div>
+                    <div class=" col-md-6 control-label">
+                        <div data-bind="text: TotalTime"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container" style="width: 100%; padding: 0px; border: medium none; border-radius: 0px; background:#e7e7e7;">
+                <div id="child" class="row form-control _child" style="display: none; margin-left: 0.1%; border-radius:0; background:#e7e7e7;" data-bind="attr: { parentid: MonthList }">
+                    <div class="col-md-6 " style="">
+                        <label class="control-label"><b>Dates</b></label></div>
+                    <div class="col-md-5 " style="margin-left:0;">
+
+
+
+
+                        <label class="control-label"><b>Duration</b></label>
+                    </div>
+                </div>
+
+                <div class="_child" style="display: none" id="SingleMonthDetail" data-bind="template: { name: 'TimeDetailsTemplate', foreach: ManageTimeSheetDetials }, attr: { parentid: MonthList }">
+                    <div class="_childNoRecord" data-bind="visible: ManageTimeSheetDetials().length == 0 && !IsInitialLoading()" style="display: none;">
+                        No Record Found 
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </script>
+    <script type="text/html" id="TimeDetailsTemplate">
+
+        <div id="ScriptDeatils" class="form-control borderall2" style="cursor:pointer; background:#e7e7e7; border-bottom:1px solid #ccc; border-radius:0; box-shadow:none;" data-bind="click: TimeSheetWholeDetail " title="Details">
+
+            <div class="col-md-6" >@* style="margin-left: 1%;"*@
+
+                <a data-bind=" text: FullDate "></a>@*Dates*@
+            </div>
+           <div class=" col-md-6 " > @*style="margin-left: 7%;"*@
+                <a data-bind="text: TimeTaken"></a>
+            </div>
+
+        </div>
+
+        <div class="container" style="width: 100%; padding: 0px; border: medium none; border-radius: 0px; background:#d7d7d7;">
+            <div class="_Subchild col-md-12 borderall" style="display: none; border-radius:0; background:#e7e7e7;" data-bind="attr: { parentid: Dates }">
+                <div class="col-md-2">
+                    <div class="col-md-12">
+                    <label class="control-label"><b>Project Name</b></label>
+                        </div>
+                    </div>
+                <div class="col-md-2">
+                    <label class="control-label"><b>Action Item</b></label></div>
+                @* <div class="col-md-2"><label class="control-label"><b>Date</b></label></div>*@
+                <div class="col-md-2">
+                    <label class="control-label"><b>Duration</b></label></div>
+                <div class="col-md-4">
+                    <label class="control-label"><b>Comments</b></label></div>
+                  <div class="col-md-2">
+                    <label class="control-label"><b>Action</b></label></div>
+            </div>
+             @Html.HiddenFor(model => model.TimeSheetId, new { id = "hdnTimeSheetId" })
+            <div class=" _Subchild" style="display: none" id="MonthDetail" data-bind="template: { name: 'DetailsTemplate', foreach: TimeDetials }, attr: { parentid: Dates }">
+                <div class="_NoSubchild" data-bind="visible: TimeDetials().length == 0 && !IsInitialLoading()" style="display: none;">
+                    No Record Found
+                </div>
+
+            </div>
+        </div>
+
+    </script>
+    
+    
+    <script type="text/html" id="DetailsTemplate">
+
+        <div id="20">
+            <div class="form-group">
+                <div class="col-md-12 borderall" >
+                 
+
+                    <div class="col-md-2"> @*col-md-11 col-md-offset-1*@
+                        <div class="col-md-12"><a class="mr-xs permissionbased"  data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_VIEW)"  data-bind="attr: { href: ProjectDetail }, text: ProjectName " target="_blank"></a></div></div>
+                    <div class="col-md-2"><a data-bind="text: ItemName, attr:{href: ActionItemDetails}" class="permissionbased"  data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_VIEW)" target="_blank"></a></div>
+                    @* <div class="col-md-2"><label data-bind="text: Dates"></label></div>  *@
+                    <div class="col-md-2">
+                        <label style="white-space:nowrap;" data-bind="text: WorkHours"></label>
+                    </div>
+                    <div class="col-md-4">
+                        <label data-bind="text: TimeSheetComment"></label>
+                    </div>
+                      <div class="col-md-2" data-bind="visible: Visble">
+                         <a  data-toggle="modal"  style="cursor:pointer"  data-target="#CreateTimeSheet"  class="permissionbased _Action" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_EDIT)" data-bind="click: $root.EditTimesheet" title="Edit Time Sheet"><i class="fa fa-pencil"></i></a>                          
+                           <input type="hidden" data-bind="value: ProjectId" id="hdnProjectId" />
+                           <input type="hidden" id="hdnActionidtemId" /> @* data-bind="value: ActionItemId"*@
+                          <input type="hidden" data-bind="value: TimeSheetId" id="hdnTimSheetId" /> 
+                        <a  data-toggle="modal" style="cursor:pointer" class="permissionbased _Action" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_DELETE)" data-bind="click: $root.DeleteTimesheet" title="Delete Time Sheet"><i class="fa fa-trash-o"></i></a>                                                
+                    </div>
+
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </script>
+}
+
+
+
+

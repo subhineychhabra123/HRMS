@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e6a956c883bb4747ae5724ce1ecda526" Name="Diagram1" ZoomLevel="85">
+        <EntityTypeShape EntityType="StrategyModel.ActionItemComment" Width="1.5" PointX="11.5" PointY="6.5" />
+        <EntityTypeShape EntityType="StrategyModel.Candidate" Width="1.5" PointX="11.112090115953279" PointY="3.4418000743919053" />
+        <EntityTypeShape EntityType="StrategyModel.Category" Width="1.5" PointX="9.4157627026623878" PointY="25.52706299420775" />
+        <EntityTypeShape EntityType="StrategyModel.ClientDetail" Width="1.5" PointX="2.125" PointY="0.5" />
+        <EntityTypeShape EntityType="StrategyModel.Comments" Width="1.5" PointX="3.556230120154205" PointY="19.365673193412682" />
+        <EntityTypeShape EntityType="StrategyModel.Company" Width="1.5" PointX="7.3895116389680249" PointY="1.9847742775384216" />
+        <EntityTypeShape EntityType="StrategyModel.Country" Width="1.5" PointX="8.1615522001690941" PointY="22.325609277154136" />
+        <EntityTypeShape EntityType="StrategyModel.Designation" Width="1.5" PointX="6.9873838773869839" PointY="3.1333198561953939" />
+        <EntityTypeShape EntityType="StrategyModel.ELMAH_Error" Width="1.5" PointX="9.82343982617531" PointY="20.86846877116173" />
+        <EntityTypeShape EntityType="StrategyModel.EmployeeSkill" Width="1.5" PointX="11.625" PointY="20.875" />
+        <EntityTypeShape EntityType="StrategyModel.Group" Width="1.5" PointX="3.9208091292161535" PointY="8.38594998809786" />
+        <EntityTypeShape EntityType="StrategyModel.InterviewDetail" Width="1.5" PointX="10.100685835862851" PointY="31.790477037332241" />
+        <EntityTypeShape EntityType="StrategyModel.InterviewDetailSkill" Width="1.5" PointX="1.1465036837134994" PointY="22.3123747959325" />
+        <EntityTypeShape EntityType="StrategyModel.Module" Width="1.5" PointX="0.058086270493495407" PointY="31.620954394164009" />
+        <EntityTypeShape EntityType="StrategyModel.ModulePermission" Width="1.5" PointX="0.71843330036775832" PointY="6.8053301753501083" />
+        <EntityTypeShape EntityType="StrategyModel.OrganizationUnit" Width="1.5" PointX="0.83389740848629612" PointY="9.6100748971151528" />
+        <EntityTypeShape EntityType="StrategyModel.Permission" Width="1.5" PointX="5.5884365931099449" PointY="30.71862392067845" />
+        <EntityTypeShape EntityType="StrategyModel.ProfilePermission" Width="1.5" PointX="4.2642864679285726" PointY="5.002063172404684" />
+        <EntityTypeShape EntityType="StrategyModel.ProjectClientDetail" Width="1.5" PointX="4.5139919242421129" PointY="29.010740636387254" />
+        <EntityTypeShape EntityType="StrategyModel.ProjectGroup" Width="1.5" PointX="5.2833299251661305" PointY="1.8761727520619391" />
+        <EntityTypeShape EntityType="StrategyModel.Referrer" Width="1.5" PointX="12" PointY="24.75" />
+        <EntityTypeShape EntityType="StrategyModel.Skill" Width="1.5" PointX="3.9983938578508766" PointY="27.076709983440448" />
+        <EntityTypeShape EntityType="StrategyModel.State" Width="1.5" PointX="4.0613678116637129" PointY="24.047711666695641" />
+        <EntityTypeShape EntityType="StrategyModel.Status" Width="1.5" PointX="10.452065426135466" PointY="17.419495069151509" />
+        <EntityTypeShape EntityType="StrategyModel.sysdiagrams" Width="1.5" PointX="9.6551880620676975" PointY="17.768865414787488" />
+        <EntityTypeShape EntityType="StrategyModel.Technology" Width="1.5" PointX="4.6354077815243082" PointY="21.246290321110884" />
+        <EntityTypeShape EntityType="StrategyModel.UserGroup" Width="1.5" PointX="8.4261449391144065" PointY="23.186564858624042" />
+        <AssociationConnector Association="StrategyModel.Referrer_Candidate_FK" />
+        <AssociationConnector Association="StrategyModel.Technology_Candidate_FK" />
+        <AssociationConnector Association="StrategyModel.FK_Category_Company" />
+        <AssociationConnector Association="StrategyModel.FK_ProjectClientDetail_ClientDetail" />
+        <AssociationConnector Association="StrategyModel.FK_Designation_Company1" />
+        <AssociationConnector Association="StrategyModel.InterviewDetail_EmployeeSkill_FK" />
+        <AssociationConnector Association="StrategyModel.FK_UserGroup_Group" />
+        <AssociationConnector Association="StrategyModel.FK_UserProject_Group" />
+        <AssociationConnector Association="StrategyModel.InterviewDetail_InterviewDetailSkill_FK" />
+        <AssociationConnector Association="StrategyModel.Skill_InterviewDetailSkill_FK" />
+        <AssociationConnector Association="StrategyModel.FK_ModulePermission_Module" />
+        <AssociationConnector Association="StrategyModel.FK_ModulePermission_Permission" />
+        <AssociationConnector Association="StrategyModel.FK_ProfilePermission_ModulePermission" />
+        <AssociationConnector Association="StrategyModel.FK_OrganisationUnit_OrganisationUnit" />
+        <AssociationConnector Association="StrategyModel.Technology_Skill_FK" />
+        <AssociationConnector Association="StrategyModel.Skill_EmployeeSkill_FK" />
+        <EntityTypeShape EntityType="StrategyModel.Attachment" Width="1.5" PointX="5.7460164622152305" PointY="4.5924558660911661" />
+        <EntityTypeShape EntityType="StrategyModel.Profile" Width="1.5" PointX="6.0228546420218674" PointY="19.022308120048748" />
+        <AssociationConnector Association="StrategyModel.FK_Profile_Company" />
+        <AssociationConnector Association="StrategyModel.FK_ProfilePermission_Profile" />
+        <EntityTypeShape EntityType="StrategyModel.Resources" Width="1.5" PointX="6.73604199976476" PointY="3.8504371064949954" />
+        <EntityTypeShape EntityType="StrategyModel.ActionList" Width="1.5" PointX="0.875" PointY="4.5" />
+        <AssociationConnector Association="StrategyModel.FK_ActionList_Company" />
+        <EntityTypeShape EntityType="StrategyModel.FileAttachments" Width="1.5" PointX="8.40464657005139" PointY="8.9737520110671181" />
+        <AssociationConnector Association="StrategyModel.FK_FileAttachments_ActionList" />
+        <EntityTypeShape EntityType="StrategyModel.ActionItemResponsible" Width="1.5" PointX="3.125" PointY="14.125" />
+        <EntityTypeShape EntityType="StrategyModel.TimeSheet" Width="1.5" PointX="7.9818900786255913" PointY="10.717229654415151" />
+        <EntityTypeShape EntityType="StrategyModel.Project" Width="1.5" PointX="7.017192031730521" PointY="14.265530279961196" />
+        <AssociationConnector Association="StrategyModel.FK_ActionList_Project" />
+        <AssociationConnector Association="StrategyModel.FK_ProjectClientDetail_Project" />
+        <AssociationConnector Association="StrategyModel.FK_Resources_Project" />
+        <AssociationConnector Association="StrategyModel.FK_TimeSheet_Project" />
+        <AssociationConnector Association="StrategyModel.FK_UserProject_Project" />
+        <EntityTypeShape EntityType="StrategyModel.ActionItem" Width="1.5" PointX="6.9980522687537849" PointY="11.268352588297963" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItem_ActionList" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItemComment_ActionItem" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItemResponsible_ActionItem" />
+        <AssociationConnector Association="StrategyModel.FK_FileAttachments_ActionItem" />
+        <AssociationConnector Association="StrategyModel.FK_TimeSheet_ActionItem" />
+        <EntityTypeShape EntityType="StrategyModel.Employee" Width="1.5" PointX="6.3699318684497541" PointY="22.903407033022216" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItemResponsible_User" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItemResponsible_User1" />
+        <AssociationConnector Association="StrategyModel.FK_ActionItemResponsible_User2" />
+        <AssociationConnector Association="StrategyModel.FK_ActionList_User" />
+        <AssociationConnector Association="StrategyModel.FK_ActionList_User1" />
+        <AssociationConnector Association="StrategyModel.FK_ActionList_User2" />
+        <AssociationConnector Association="StrategyModel.FK_Attachment_User" />
+        <AssociationConnector Association="StrategyModel.FK_User_Candidate" />
+        <AssociationConnector Association="StrategyModel.FK_Comments_User" />
+        <AssociationConnector Association="StrategyModel.FK_Comments_User1" />
+        <AssociationConnector Association="StrategyModel.FK_User_Company" />
+        <AssociationConnector Association="StrategyModel.FK_User_Designation" />
+        <AssociationConnector Association="StrategyModel.FK_Employee_Employee" />
+        <AssociationConnector Association="StrategyModel.FK_FileAttachments_User" />
+        <AssociationConnector Association="StrategyModel.FK_FileAttachments_User1" />
+        <AssociationConnector Association="StrategyModel.FK_FileAttachments_User2" />
+        <AssociationConnector Association="StrategyModel.FK_Module_User" />
+        <AssociationConnector Association="StrategyModel.FK_Module_User1" />
+        <AssociationConnector Association="StrategyModel.FK_Profile_User" />
+        <AssociationConnector Association="StrategyModel.FK_Profile_User1" />
+        <AssociationConnector Association="StrategyModel.FK_ProfilePermission_User" />
+        <AssociationConnector Association="StrategyModel.FK_ProfilePermission_User1" />
+        <AssociationConnector Association="StrategyModel.FK_Project_Employee" />
+        <AssociationConnector Association="StrategyModel.FK_Resources_Employee" />
+        <AssociationConnector Association="StrategyModel.FK_TimeSheet_Employee" />
+        <AssociationConnector Association="StrategyModel.FK_User_OrganizationUnit" />
+        <AssociationConnector Association="StrategyModel.FK_User_Profile" />
+        <AssociationConnector Association="StrategyModel.FK_User_Referrer" />
+        <AssociationConnector Association="StrategyModel.FK_User_Technology" />
+        <AssociationConnector Association="StrategyModel.FK_UserGroup_User" />
+        <AssociationConnector Association="StrategyModel.FK_UserProject_User" />
+        <AssociationConnector Association="StrategyModel.User_InterviewDetail_FK" />
+        <EntityTypeShape EntityType="StrategyModel.LeavesApprovedBy" Width="1.5" PointX="2.8775251353520552" PointY="17.821294450117879" />
+        <EntityTypeShape EntityType="StrategyModel.LeaveType" Width="1.5" PointX="0.47837534755392719" PointY="6.4026478856814313" />
+        <EntityTypeShape EntityType="StrategyModel.Leaves" Width="1.5" PointX="8.625" PointY="61" />
+        <AssociationConnector Association="StrategyModel.FK_Leaves_LeaveType" />
+        <AssociationConnector Association="StrategyModel.FK_LeavesApprovedBy_Leaves" />
+        <AssociationConnector Association="StrategyModel.FK_Leaves_Employee" />
+        <AssociationConnector Association="StrategyModel.FK_Leaves_Employee1" />
+        <AssociationConnector Association="StrategyModel.FK_LeavesApprovedBy_Employee" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

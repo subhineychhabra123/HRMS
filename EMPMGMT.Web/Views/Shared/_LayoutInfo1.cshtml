@@ -1,0 +1,253 @@
+﻿@using EMPMGMT.Utility;
+@using EMPMGMT.Web.Infrastructure;
+@using EMPMGMT.Web.ViewModels;
+
+<!doctype html>
+<html class="fixed">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    @*   <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/InnerCss.css" rel="stylesheet" />*@
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")" type="text/javascript"></script>
+
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-3.0.0.js")"></script>
+    <script src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.Core.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.Common.js")"></script>
+
+    <script src="~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.DateFormat.js"></script>
+    <script src="~/Scripts/file-upload/jquery.form.js"></script>
+    <script src="~/Scripts/EMPMGMT.Messages/en-US.js"></script>
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- Web Fonts  -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css">
+
+    <!-- Vendor CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap/css/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/font-awesome/css/font-awesome.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/magnific-popup/magnific-popup.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/bootstrap-datepicker/css/datepicker3.css")" />
+    <link href="@Url.Content("~/assets/vendor/jquery-datatables-bs3/assets/css/datatables.css")" rel="stylesheet" />
+    <!-- Specific Page Vendor CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/vendor/jquery-ui/css/ui-lightness/jquery-ui-1.10.4.custom.css")" />
+
+
+
+    <!-- Theme CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/theme.css")" />
+
+    <!-- Skin CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/skins/default.css")" />
+
+    <!-- Theme Custom CSS -->
+    <link rel="stylesheet" href="@Url.Content("~/assets/stylesheets/theme-custom.css")">
+
+    <!-- Head Libs -->
+    <script src="@Url.Content("~/assets/vendor/modernizr/modernizr.js")"></script>
+</head>
+<body>
+    <section class="body">
+
+        <!-- start: header -->
+        <header class="header">
+            <div id="dvlogo" class="logo-container">
+                <a href="/Employee/Home" class="logo">
+
+                    <img src="/content/images/logo.png" height="35" alt="" title=""></a>
+                <div class="visible-xs toggle-sidebar-left" data-toggle-class="sidebar-left-opened" data-target="html" data-fire-event="sidebar-left-opened">
+                    <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                </div>
+            </div>
+
+            <!-- start: search & user box -->
+            <div class="header-right">
+
+                <div id="userbox" class="userbox">
+                    <a href="#" data-toggle="dropdown">
+                        <figure class="profile-picture">
+                            <img src="@SessionManagement.LoggedInUser.ProfileImageUrl" alt="Joseph Doe" class="img-circle" data-lock-picture="assets/images/!logged-user.jpg" />
+                        </figure>
+                        <div class="profile-info" data-lock-name="John Doe" data-lock-email="johndoe@okler.com">
+                            <span class="name">@SessionManagement.LoggedInUser.UserName</span>
+                            <span class="role">administrator</span>
+                        </div>
+
+                        <i class="fa custom-caret"></i>
+                    </a>
+
+                    <div class="dropdown-menu">
+                        <ul class="list-unstyled">
+                            <li class="divider"></li>
+                            <li>
+                                <a role="menuitem" tabindex="-1" href="~/Employee/ViewUserProfile"><i class="fa fa-user"></i>My Profile</a>
+                            </li>
+                            <li>
+                                <form method="post" id="logoutForm" action="/Employee/LogOut">
+                                    <input type="hidden" value="Hx-tC8L8Akf0NFZPmiJefij6UhvguSVFS-ttwBQj7eCRkHQ4wLDHAlKFhxyAbpBejmKu0gDuNoWpc5biq3AJaD4fmJwpncTwk69l_JgUFtLbnMW9yE7pbqZ5cPUo_zHOVof8B9QbAMYW7udRj4O13677W6azzAh3aUkpjp_SCxc1" name="__RequestVerificationToken">
+                                    <a role="menuitem" tabindex="-1" href="javascript:document.getElementById('logoutForm').submit()"><i class="fa fa-power-off"></i>Sign Out</a>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- end: search & user box -->
+        </header>
+        <!-- end: header -->
+
+        <div class="inner-wrapper">
+            <!-- start: sidebar -->
+            <aside id="sidebar-left" class="sidebar-left">
+
+                <div class="sidebar-header">
+                    <div class="sidebar-title">
+                        Navigation
+                    </div>
+                    <div class="sidebar-toggle hidden-xs" data-toggle-class="sidebar-left-collapsed" data-target="html" data-fire-event="sidebar-left-toggle">
+                        <i class="fa fa-bars" aria-label="Toggle sidebar"></i>
+                    </div>
+                </div>
+
+                <div class="nano">
+                    <div class="nano-content">
+                        <nav id="menu" class="nav-main" role="navigation">
+                            <ul class="nav nav-main">
+                                <li class="nav-active">
+                                    <a href="/Employee/Home">
+                                        <i class="fa fa-home" aria-hidden="true"></i>
+                                        <span>Home</span>
+                                    </a>
+                                </li>
+
+
+                                <li class="nav-parent">
+                                    <a>
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                        <span>Employee Management</span>
+                                    </a>
+                                    <ul class="nav nav-children">
+
+                                        <li class="permissionbased" data-permission="@string.Concat(Constants.MODULE_USER, Constants.PERMISSION_VIEW)">
+                                            <a href="/Employee/ManageUser">Employees
+                                            </a>
+                                        </li>
+
+                                        <li  class="permissionbased" data-permission="@string.Concat(Constants.MODULE_ORGANIZATIONAL_UNITS, Constants.PERMISSION_VIEW)">
+                                            <a href="/Employee/Leaves">Leaves
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+
+
+                                <li class="nav-parent">
+                                    <a>
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                       <span>Project Management</span>
+                                    </a>
+                                    <ul class="nav nav-children">
+
+                                        <li class="permissionbased" data-permission="@string.Concat(Constants.MODULE_USER, Constants.PERMISSION_VIEW)">
+                                            <a href="/Employee/ProjectList">Projects
+                                            </a>
+                                        </li>
+
+                                        <li  class="permissionbased" data-permission="@string.Concat(Constants.MODULE_ORGANIZATIONAL_UNITS, Constants.PERMISSION_VIEW)">
+                                             <a href="/Employee/Timesheet">Timesheet
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                @*Project ActionList *@
+                                @*                                 <li class="nav-parent">
+                                    <a>
+                                        <i class="fa fa-cog" aria-hidden="true"></i>
+                                        <span>Action List</span>
+                                    </a>
+                                    <ul class="nav nav-children">
+                                        <li class="permissionbased" data-permission="@string.Concat(Constants.MODULE_PROFILE, Constants.PERMISSION_VIEW)">
+                                            <a href="/Employee/ManageActionItem">ManageAction Item
+                                            </a>
+                                        </li>
+</ul>
+</li>
+                                      *@
+                            </ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </aside>
+            <!-- end: sidebar -->
+
+            <section role="main" class="content-body">
+                <header class="page-header">
+                    <h2>@ViewBag.Title</h2>
+
+                    <div id="tblcontent" class="right-wrapper pull-right">
+                        <ol class="breadcrumbs">
+                            <li><span>@Html.MvcSiteMap().SiteMapPath()</span>
+                            </li>
+                            @*<li><span>Dashboard</span></li>*@
+                        </ol>
+                        <a>
+                            <i class="fa"></i>
+                        </a>
+                    </div>
+                </header>
+
+                <!-- start: page -->
+
+                @RenderBody()
+
+                <!-- end: page -->
+            </section>
+        </div>
+
+
+    </section>
+
+    <!-- Vendor -->
+    @*     <script src="@Url.Content("~/assets/vendor/jquery/jquery.js")"></script>*@
+    <script src="@Url.Content("~/assets/vendor/jquery-browser-mobile/jquery.browser.mobile.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/bootstrap/js/bootstrap.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/nanoscroller/nanoscroller.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/bootstrap-datepicker/js/bootstrap-datepicker.js")"></script>
+    @*      <script src="@Url.Content("~/assets/vendor/magnific-popup/magnific-popup.js")"></script>*@
+    <script src="@Url.Content("~/assets/vendor/jquery-placeholder/jquery.placeholder.js")"></script>
+    <!-- Theme Base, Components and Settings -->
+    <script src="@Url.Content("~/assets/javascripts/theme.js")"></script>
+
+    <!-- Theme Custom -->
+    <script src="@Url.Content("~/assets/javascripts/theme.custom.js")"></script>
+
+    <!-- Theme Initialization Files -->
+    <script src="@Url.Content("~/assets/javascripts/theme.init.js")"></script>
+    <script src="@Url.Content("~/assets/vendor/modernizr/modernizr.js")"></script>
+</body>
+</html>
+
+
+@RenderSection("scripts", required: false)
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        @RenderSection("ReadyScripts", false)
+    });
+</script>
+
+
+
+
+

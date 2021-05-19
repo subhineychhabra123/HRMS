@@ -1,0 +1,109 @@
+﻿@using EMPMGMT.Utility;
+@{
+    ViewBag.Title = "Leave";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+
+<h2>Leave</h2>
+@*<style>
+    .underconstruction { width: 100%; height: 100%; }
+    .background { background-image: url("/content/images/undercontruction_.jpg"); background-position: center center; background-repeat: no-repeat;  height: 500px; }
+</style>*@
+    @section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script src="~/Scripts/EMPMGMT.User/EMPMGMT.User.LeaveDetail.js" defer="defer" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Popup.js")"></script>
+    <script src="~/Scripts/AutoComplete.js"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+} 
+
+
+@section ReadyScripts
+{
+   
+EMPMGMT.User.LeaveDetail.pageLoad();
+   
+}
+
+<div class="row">
+    <div class="col-md-6 col-xs-5 p-none">
+       
+    </div>
+    <div class="col-md-6 col-xs-7 p-none">
+        <a href="#"  class="btn btn-primary pull-right ml-xs permissionbased" data-bind="click: ApplyLeave">Apply Leave</a>
+            
+    </div>
+</div>
+<div class="tabs tabs-primary row">
+    <ul class="nav nav-tabs filterlist" data-bind="foreach: RegisteredUsersFilterList">
+        <li class="active" data-bind="click: $root. FilterUsers, css: ActiveClass">
+            <a data-toggle="tab" data-bind="css: ActiveClass, text: DisplayText, attr: { title: Title }" href="#"></a>
+        </li>
+    </ul>
+    <div class="row">   
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table summary="Manage Users" class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                            <thead>
+                                <tr class="primary">
+                                   @* <!-- ko foreach:TableHeaders  -->
+                                    <th class="sorting" scope="col" data-bind="html: ColumnText"></th>
+                                    <!-- /ko -->
+                                    <th scope="col" class="actionLink">Action</th>*@
+                                    <th class="sorting" scope="col"> EmpName   </th>
+                                    <th class="sorting" scope="col"> FromDate   </th>
+                                    <th class="sorting" scope="col"> Todate   </th>
+                                    <th class="sorting" scope="col"> Reason   </th>
+                                    <th class="sorting" scope="col"> Status   </th>
+                                    <th class="sorting" scope="col"> ApprovedBy   </th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="template: { name:'CompanyUserTemplate', foreach:GetAllLeavesDetailArray }">
+                            </tbody>
+                            <tr class="_ProfilesNoRecord" style="display: none">
+                                <td colspan="6"><b>No Record Found</b></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="pull-left _CompanyUsersPager">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="CompanyUserTemplate">
+    <tr>
+        <td class="w25pc">
+           @* <a data-bind="attr: { href: ViewUserDetail }*@@*, click: ViewUserDetailAction">*@
+                <div data-bind="text: UserName"></div>
+            @*</a>*@
+        </td>
+         <td class="w25pc">
+                <div data-bind="text: FromDate"></div>
+        </td>
+        <td class="w35pc">
+            <div data-bind="text: ToDate"></div>
+        </td>
+        <td class="w20pc">
+                <div data-bind="text: Reason"></div>
+        </td>
+         <td class="w20pc">
+                <div data-bind="text: ApprovedStatus"></div>
+        </td>
+        
+             <td class="w20pc actionLinks">
+
+            <a class="_editHide _backtohere permissionbased"  data-bind=" click :Approve,ifnot:Status"><span data-bind="text: editAction " style="margin-left: 16px;"></span></a>&nbsp;&nbsp;&nbsp;
+            <a class="permissionbased _delete" style="cursor:pointer"; data-bind=" click :DisApproveLeave,if:Status"> <span data-bind="text: deleteAction  "></span></a>&nbsp;&nbsp;&nbsp;
+
+            @*  <a class="permissionbased" title="Update Status" data-permission="@string.Concat(Constants.MODULE_USER, Constants.PERMISSION_DELETE)" data-bind="visible: ResendLink, click: ResendLinkAction" href="javascript:void(0)">Resend</a>*@
+
+       
+        </td>
+    </tr>
+</script>

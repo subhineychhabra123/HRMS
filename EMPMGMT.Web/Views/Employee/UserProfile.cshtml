@@ -1,0 +1,92 @@
+﻿@using EMPMGMT.Utility;
+@{
+    ViewBag.Title = "UserProfile";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script src="~/Scripts/file-upload/jquery.uploadfile.js"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/file-upload/jquery.form.js")"></script>
+    <link href="~/Scripts/file-upload/uploadfile.min.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.UserProfile.js")" type="text/javascript"></script>
+
+    <script src="~/Scripts/Popup.js"></script>
+    <link href="~/Content/css/uploadfile.css" rel="stylesheet" />
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.UserProfile.pageLoad();
+}
+@*<style >
+    .ajax-file-upload input[type="file"] {
+        background-image: url("/content/images/undercontruction_.jpg");
+    }
+
+</style>*@
+
+<div class="row" id="editUserProfileDetail">
+    <section class="panel">
+        <header class="panel-heading">
+            </header>
+   <div class="panel-body">
+    <div class="col-lg-6 clearfix ">
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="inputSuccess">First Name<span class="required">*</span></label>
+            <div class="col-md-6 ">
+                <input type="text" class="form-control " data-bind="value: txtFirstName" placeholder="" />
+                <label class="error" data-bind="validationMessage: txtFirstName"></label>
+                <input type="hidden" data-bind="value:UserId" id="hdnUserId" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-md-3 control-label" for="inputSuccess">Last Name</label>
+            <div class="col-md-6 ">
+                <input type="text" class="form-control " data-bind="value: txtLastName" placeholder="" />
+            </div>
+        </div>
+        <div class="mb-lg">
+            <label class="col-md-3 control-label" for="inputSuccess">Email Id<span class="required">*</span></label>
+            <div class="col-md-6 ">
+                <input type="text" class="form-control" readonly="readonly" data-bind="value: txtEmailId" placeholder="" />
+                <label class="error" data-bind="validationMessage: txtEmailId"></label>
+            </div>
+        </div>
+            
+    </div>
+
+
+        <div class="col-lg-6 clearfix">
+                    <div class="col-md-12"> 
+        <img class="img-rounded  mb-sm" alt="" data-bind="attr: { src: imgImageURL }" id="ProfileImage1" />
+        <input type="file" data-bind="value: ProfileImage" id="fileupload" name="file" />
+</div>
+    </div>
+
+    </div>
+     <footer class="panel-footer">
+            <div class="row">
+                <div class="col-lg-5">
+                 
+            <div class="col-lg-11">
+                <a class="btn btn-default pull-right ml-xs" data-bind="click: CancelEdit">Cancel</a>
+                <a class="btn btn-primary pull-right permissionbased" data-permission="@string.Concat(Constants.MODULE_USER, Constants.PERMISSION_EDIT)" data-bind="click: EditUserProfile">Update</a>
+            </div>
+                 
+  </div>
+                </div>
+            </footer>
+        </section>
+    </div>  
+
+
+
+
+
+
+
+
+
+

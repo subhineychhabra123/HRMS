@@ -1,0 +1,15 @@
+<p>Dear {Registration_User_Name},</p><br /><br />
+
+<p>This is invitation for registering on EMPMGMT DEPLOYMENT.<br /><br />
+
+
+
+UserName:&nbsp; {Account_Login_UserId} <br /><br />
+
+Please click the link below to activate your account.</p><br /><br />
+<a href="{Account_Login_URL}"> {Account_Login_URL} </a>
+
+<p></p>
+
+<p>Regards,</p><br />
+<P>Technical Team</P>

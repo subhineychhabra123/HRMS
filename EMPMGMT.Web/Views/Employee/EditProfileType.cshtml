@@ -1,0 +1,109 @@
+﻿@using EMPMGMT.Web.Infrastructure;
+@using EMPMGMT.Utility;
+
+@model EMPMGMT.Web.ViewModels.ProfileVM
+
+
+@{
+    ViewBag.Title = "ErucaCRM | EditProfileType";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+
+
+
+<div class="error"></div>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+ 
+       <div class="heading">
+      <h2>Edit Profile</h2>
+      <div class="buttonarea">
+       
+        <a class="button _back" >
+                        Back</a>
+      </div>
+      <div class="clear"></div>
+    </div>
+    
+    
+    
+    <div class="wrapper">
+           @Html.HiddenFor(model => model.ProfileId)
+
+        <div class="control-container">
+        	<div class="left-container">
+        		Profile Name<span class="required">*</span>
+        	</div>
+            <div class="right-container">
+            <div class="error-container">@Html.ValidationMessageFor(model => model.ProfileName, String.Empty, new { @class="required"})</div>
+
+                @if ((Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false))
+                    { 
+                       
+                        @Html.TextBoxFor(model => model.ProfileName, new { @class = "input-type-text", disabled = "disabled", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextBoxFor(model => model.ProfileName, new { @class = "input-type-text", maxlength = 250 })
+                        @Html.ValidationMessageFor(model => model.ProfileName, String.Empty, new { @class="required"})
+                    }
+
+                
+                     
+        		
+        	</div>
+            <div class="clear"></div>
+        </div>
+
+
+            <div class="control-container">
+        	<div class="left-container">
+        		Description<span class="required">*</span>
+        	</div>
+            <div class="right-container fix-textarea">
+            <div class="error-container"> @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class="required"})</div>
+               @if ((Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false))
+                    { 
+                        @Html.TextAreaFor(model => model.Description, new { @class = "input-type-textarea", disabled = "disabled", @readonly = "readonly" })
+                    }
+                    else
+                    {
+                        @Html.TextAreaFor(model => model.Description, new { @class = "input-type-textarea", maxlength = 800 })
+                        @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class="required"})
+                    }
+                     
+        		
+        	</div>
+            <div class="clear"></div>
+        </div>
+
+            
+            <br />
+
+            <div class="dvpadding">
+
+            
+             
+                    @if (!((Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false)))
+                    { 
+                        <input type="submit" class="button small purple permissionbased" data-permission="@string.Concat(Constants.MODULE_PROFILE, Constants.PERMISSION_EDIT)" value="Save" />
+                       
+                    
+                    }
+                    else
+                    {
+                        <span></span>
+                    }
+                   
+
+                
+            </div>
+        </div>
+      
+   
+}
+
+

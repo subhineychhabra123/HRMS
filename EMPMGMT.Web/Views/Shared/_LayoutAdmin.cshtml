@@ -1,0 +1,130 @@
+﻿@using EMPMGMT.Utility;
+@using EMPMGMT.Web.Infrastructure;
+@using EMPMGMT.Web.ViewModels;
+<!DOCTYPE html>
+<html style="padding: 0; margin: 0; border: 0">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Home</title>
+    <link href="@Url.Content("~/Content/css/jquery-ui.css")" rel="stylesheet" type="text/css" />
+    <link href="~/Content/css/InnerCss.css" rel="stylesheet" />
+  @*  <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>*@
+    <script src="~/Scripts/jquery-ui.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout-3.0.0.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.Core.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.Common.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script src="~/Scripts/EMPMGMT.Framework/EMPMGMT.Framework.DateFormat.js"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax.js")" type="text/javascript"></script>
+    <script src="~/Scripts/file-upload/jquery.form.js"></script>
+    <script src="~/Scripts/EMPMGMT.Messages/en-US.js"></script>
+
+</head>
+<body style="padding: 0; margin: 0; border: 0">
+    <div class="wrapper">
+        <div class="header">
+            <div id="dvlogo" class="logo">
+                <img src="/content/images/InnerHomelogo.png" alt="" title="">
+            </div>
+            <div id="tblban" class="right-section">
+             @*   <span>Welcome : @HttpContext.Current.Request.Cookies["username"].Value.ToString()</span>*@
+                <span>Welcome :    @SessionManagement.LoggedInUser.UserName</span>
+
+                <div class="logout">
+
+
+                    <img class="profileimg" id="imglogout" src="@SessionManagement.LoggedInUser.ProfileImageUrl" height="30" width="30" alt="" title="">
+                    <div class="divaccount _popup _divaccount" id="divaccount" style="display: none;">
+                        <span class="userarrow"></span>
+                        <div class="userimage">
+
+                            <img onerror="this.onerror=null;this.src='/Uploads/users/no_image.gif'" class="profileimg" src="@SessionManagement.LoggedInUser.ProfileImageUrl">
+                        </div>
+                        <div class="userprofiledetail">
+
+                            <div class="userprofilename">@SessionManagement.LoggedInUser.UserName</div>
+                            <div class="userprofileemail">@HttpContext.Current.Request.Cookies["EmailId"].Value.ToString()</div>
+
+                            <a href="~/admin/ViewAdminProfile">
+                                <div class="userprofileemail">My Account</div>
+                            </a>
+                            <div class="userprofilelogout">
+                                <form method="post" id="logoutForm" class="floatright" action="/Admin/LogOut">
+                                    <a class="button purple small" href="javascript:document.getElementById('logoutForm').submit()">Sign Out</a>
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <div id="tblbody" class="navigation">
+            <ul>
+                <li class="active">
+
+                   
+
+                    <a href="/admin/Home" menu="Home">
+                        <img src="/content/images/Home.png" alt="" title="">
+                        <span class="text">Home</span></a>
+                </li>
+                <li>
+                    <a href="/admin/RegisteredUsers" menu="RegisteredUsers">
+                        <img src="/content/images/group-32.png" alt="" title="">
+                        <span class="text">Users</span></a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div id="tblcontent" class="cantant-section">
+            @RenderSection("breadcrumb", false)
+            @RenderBody()
+
+        </div>
+        <div class="clear"></div>
+    </div>
+    @RenderSection("scripts", required: false)
+    <script type="text/javascript">
+        $(document).ready(function () {
+            @RenderSection("ReadyScripts", false)
+
+            $(".usrpic").click(function () {
+                $("#divaccount").toggle();
+
+            });
+
+            $("._mainmenu").click(function () {
+                $("#divMainMenu").toggle();
+                $("#divSubMenu").hide();
+
+            });
+
+            $('#imglogout').click(function () {
+                $('#divaccount').toggle();
+            });
+
+
+
+            //$('#tblcontent,#tblbody,#dvlogo').click(function () {
+            //    $('#divaccount').hide();
+            //});
+
+
+            $("html").mouseup(function (e) {
+                var subject = $("#divaccount");
+                if (e.target.id != subject.attr('id') && e.target.className != "userarrow" && e.target.className != "userprofiledetail" && e.target.className != "userprofilelogout" && e.target.className != "userprofileemail" && e.target.className != "userprofilename" && e.target.className != "profileimg") {
+
+                    subject.hide();
+                }
+            });
+
+        });
+    </script>
+</body>
+</html>
+
+

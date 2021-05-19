@@ -1,0 +1,981 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1728F991-3537-45D3-9962-23BE9D79B6BD}</ProjectGuid>
+    <ProjectTypeGuids>{E3E379DF-F4C6-4180-9B81-6769533ABE47};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EMPMGMT.Web</RootNamespace>
+    <AssemblyName>EMPMGMT.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.0\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah.Mvc">
+      <HintPath>..\packages\Elmah.MVC.2.1.1\lib\net40\Elmah.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus">
+      <HintPath>..\packages\EPPlus.3.1.3.3\lib\net35\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="HttpCookieEncryption">
+      <HintPath>..\packages\httpsecurecookie.0.1.1\lib\net\HttpCookieEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MvcSiteMapProvider">
+      <HintPath>..\packages\MvcSiteMapProvider.MVC4.Core.4.6.7\lib\net45\MvcSiteMapProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="Recaptcha.Web">
+      <HintPath>..\packages\RecaptchaNet.1.3\lib\net45\Recaptcha.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="RouteDebugger">
+      <HintPath>..\packages\routedebugger.2.1.4.0\lib\net40\RouteDebugger.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=3.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap.Net4">
+      <HintPath>..\packages\structuremap.3.1.4.143\lib\net40\StructureMap.Net4.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Mvc.FixedDisplayModes, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.FixedDisplayModes.1.0.0\lib\net40\Microsoft.Web.Mvc.FixedDisplayModes.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.4.0.20710.0\lib\net40\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.4.0.20710.0\lib\net40\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.4.0.20710.0\lib\net40\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20710.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.2.0.20715.0\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx">
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\EmployeeController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\GoalController.cs" />
+    <Compile Include="Controllers\SiteController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\AutoMapperWebProfile.cs" />
+    <Compile Include="Infrastructure\CustomAuthorizeAttribute.cs" />
+    <Compile Include="Infrastructure\EncryptedActionParameterAttribute.cs" />
+    <Compile Include="Infrastructure\StructureMap.cs" />
+    <Compile Include="Infrastructure\SubDomainRoute.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ActionItemCommentVM.cs" />
+    <Compile Include="ViewModels\ActionItemResponsibleVM.cs" />
+    <Compile Include="ViewModels\ActionItemVM.cs" />
+    <Compile Include="ViewModels\ActionListVM.cs" />
+    <Compile Include="ViewModels\CategoryVM.cs" />
+    <Compile Include="ViewModels\CompanyVM.cs" />
+    <Compile Include="ViewModels\CommentsVM.cs" />
+    <Compile Include="ViewModels\LeavesItemVM.cs" />
+    <Compile Include="ViewModels\LeaveTypeVM.cs" />
+    <Compile Include="ViewModels\OptionVM.cs" />
+    <Compile Include="ViewModels\ReviewQuestionVM.cs" />
+    <Compile Include="ViewModels\FillWeeklyReviewVM.cs" />
+    <Compile Include="ViewModels\DailyActionItemVM.cs" />
+    <Compile Include="ViewModels\DateTimeSheetVM.cs" />
+    <Compile Include="ViewModels\DesignationVM.cs" />
+    <Compile Include="ViewModels\FileAttachmentsVM.cs" />
+    <Compile Include="ViewModels\ForgotPasswordVM.cs" />
+    <Compile Include="ViewModels\LoginVM.cs" />
+    <Compile Include="ViewModels\ProfileVM.cs" />
+    <Compile Include="ViewModels\ProjectVM.cs" />
+    <Compile Include="ViewModels\RefferrerVM.cs" />
+    <Compile Include="ViewModels\RegistrationVM.cs" />
+    <Compile Include="ViewModels\OrganizationUnitVM.cs" />
+    <Compile Include="ViewModels\ResetPasswordVM.cs" />
+    <Compile Include="ViewModels\ResourcesVM.cs" />
+    <Compile Include="ViewModels\TechnologyVM.cs" />
+    <Compile Include="ViewModels\EmployeeVM.cs" />
+    <Compile Include="ViewModels\TimeSheetVM.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="assets\ajax\ajax-treeview-nodes.html" />
+    <Content Include="assets\ajax\ui-elements-lightbox-ajax.html" />
+    <Content Include="assets\ajax\ui-elements-modals-ajax.html" />
+    <Content Include="assets\javascripts\dashboard\examples.dashboard.js" />
+    <Content Include="assets\javascripts\theme.custom.js" />
+    <Content Include="assets\javascripts\theme.init.js" />
+    <Content Include="assets\javascripts\theme.js" />
+    <Content Include="assets\stylesheets\skins\default.css" />
+    <Content Include="assets\stylesheets\theme-custom.css" />
+    <Content Include="assets\stylesheets\theme.css" />
+    <Content Include="assets\vendor\bootstrap-datepicker\css\datepicker.css" />
+    <Content Include="assets\vendor\bootstrap-datepicker\css\datepicker3.css" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.az.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.da.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.de.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.el.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.es.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.et.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.he.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.id.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.is.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.it.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.no.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.th.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.ua.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="assets\vendor\bootstrap-datepicker\js\locales\bootstrap-datepicker.zh-TW.js" />
+    <Content Include="assets\vendor\bootstrap-multiselect\bootstrap-multiselect.css" />
+    <Content Include="assets\vendor\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-theme.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.css" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.js" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\vendor\font-awesome\css\font-awesome.css" />
+    <Content Include="assets\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\vendor\jquery-autosize\jquery.autosize.js" />
+    <Content Include="assets\vendor\jquery-browser-mobile\jquery.browser.mobile.js" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\css\datatables.css" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\images\sort_asc.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\images\sort_asc_disabled.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\images\sort_both.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\images\sort_desc.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\images\sort_desc_disabled.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\assets\js\datatables.js" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\Datatables.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\css\datatables.css" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\images\sort_asc.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\images\sort_asc_disabled.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\images\sort_both.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\images\sort_desc.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\images\sort_desc_disabled.png" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\js\datatables.js" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\pagination_four_buttons.html" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\pagination_full.html" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\pagination_normal.html" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\examples\pagination_two_buttons.html" />
+    <Content Include="assets\vendor\jquery-datatables-bs3\index.html" />
+    <Content Include="assets\vendor\jquery-placeholder\jquery.placeholder.js" />
+    <Content Include="assets\vendor\jquery-ui-touch-punch\jquery.ui.touch-punch.js" />
+    <Content Include="assets\vendor\jquery-ui-touch-punch\magnific-popup\magnific-popup.css" />
+    <Content Include="assets\vendor\jquery-ui-touch-punch\magnific-popup\magnific-popup.js" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\jquery-ui-1.10.4.custom.css" />
+    <Content Include="assets\vendor\jquery-ui\css\ui-lightness\jquery-ui-1.10.4.custom.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\AUTHORS.txt" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\checkbox.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\icons.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\radio.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\splitbutton.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\button\toolbar.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\demos.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\constrain-movement.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\cursor-style.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\delay-start.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\events.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\handle.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\revert.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\scroll.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\snap-to.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\sortable.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\draggable\visual-feedback.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\accepted-elements.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras2.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras2_min.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras3.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras3_min.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras4.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras4_min.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\images\high_tatras_min.jpg" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\photo-manager.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\propagation.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\revert.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\shopping-cart.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\droppable\visual-feedback.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\calendar.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\demo-config-on-tile.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\demo-config-on.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\demo-spindown-closed.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\demo-spindown-open.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\icon-docs-info.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\images\pbar-ani.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\animate.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\aspect-ratio.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\constrain-area.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\delay-start.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\helper.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\max-min.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\snap-to-grid.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\synchronous-resize.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\textarea.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\resizable\visual-feedback.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\colorpicker.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\hotelrooms.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\multiple-vertical.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\range-vertical.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\range.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\rangemax.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\rangemin.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\side-scroll.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\slider-vertical.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\slider\steps.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\currency.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\decimal.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\latlong.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\overflow.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\spinner\time.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\widget\default.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\demos\widget\index.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\button.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\draggable.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\droppable.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\jQuery.widget.bridge.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\jQuery.widget.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\mouse.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\resizable.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\slider.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\docs\spinner.html" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\globalize.culture.de-DE.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\globalize.culture.ja-JP.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\globalize.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\jquery.mousewheel.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\jshint.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\qunit.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\external\qunit.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\Gruntfile.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\jquery-1.10.2.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\MIT-LICENSE.txt" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\animated-overlay.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery-ui.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.all.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.base.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.button.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.core.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.resizable.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.slider.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.spinner.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\jquery.ui.theme.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\animated-overlay.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.spinner.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\animated-overlay.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery-ui.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.all.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.base.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.button.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.core.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.resizable.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.slider.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.spinner.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\jquery.ui.theme.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\animated-overlay.gif" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_diagonals-thick_18_b81900_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_flat_10_000000_40x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_glass_100_f6f6f6_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_glass_100_fdf5ce_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_gloss-wave_35_f6a828_500x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-bg_highlight-soft_75_ffe45c_1x100.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-icons_228ef1_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-icons_ef8c08_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-icons_ffd27a_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery-ui.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.button.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.core.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.resizable.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.slider.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.spinner.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\themes\ui-lightness\minified\jquery.ui.theme.min.css" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery-ui.custom.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.button.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.core.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.draggable.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.droppable.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.mouse.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.resizable.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.slider.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.spinner.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\jquery.ui.widget.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery-ui.custom.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.button.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.core.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.draggable.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.droppable.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.mouse.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.resizable.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.slider.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.spinner.min.js" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui\minified\jquery.ui.widget.min.js" />
+    <Content Include="assets\vendor\jquery-ui\index.html" />
+    <Content Include="assets\vendor\jquery-ui\js\jquery-1.10.2.js" />
+    <Content Include="assets\vendor\jquery-ui\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="assets\vendor\jquery-ui\js\jquery-ui-1.10.4.custom.min.js" />
+    <Content Include="assets\vendor\jquery-validation\additional-methods.js" />
+    <Content Include="assets\vendor\jquery-validation\additional-methods.min.js" />
+    <Content Include="assets\vendor\jquery-validation\jquery.validate.js" />
+    <Content Include="assets\vendor\jquery-validation\jquery.validate.min.js" />
+    <Content Include="assets\vendor\jquery\jquery.js" />
+    <Content Include="assets\vendor\jquery\jquery.min.js" />
+    <Content Include="assets\vendor\modernizr\modernizr.js" />
+    <Content Include="assets\vendor\nanoscroller\nanoscroller.css" />
+    <Content Include="assets\vendor\nanoscroller\nanoscroller.js" />
+    <Content Include="bin\AutoMapper.dll" />
+    <Content Include="bin\Elmah.dll" />
+    <Content Include="bin\Elmah.Mvc.dll" />
+    <Content Include="bin\EMPMGMT.Business.dll" />
+    <Content Include="bin\EMPMGMT.Business.pdb" />
+    <Content Include="bin\EMPMGMT.Domain.dll" />
+    <Content Include="bin\EMPMGMT.Domain.pdb" />
+    <Content Include="bin\EMPMGMT.Repository.dll" />
+    <Content Include="bin\EMPMGMT.Repository.pdb" />
+    <Content Include="bin\EMPMGMT.Utility.dll" />
+    <Content Include="bin\EMPMGMT.Utility.pdb" />
+    <Content Include="bin\EMPMGMT.Web.dll" />
+    <Content Include="bin\EMPMGMT.Web.pdb" />
+    <Content Include="bin\EntityFramework.dll" />
+    <Content Include="bin\EntityFramework.SqlServer.dll" />
+    <Content Include="bin\EPPlus.dll" />
+    <Content Include="bin\HttpCookieEncryption.dll" />
+    <Content Include="bin\ImageResizer.dll" />
+    <Content Include="bin\ImageResizer.Mvc.dll" />
+    <Content Include="bin\Microsoft.Web.Infrastructure.dll" />
+    <Content Include="bin\Microsoft.Web.Mvc.FixedDisplayModes.dll" />
+    <Content Include="bin\MvcSiteMapProvider.dll" />
+    <Content Include="bin\Newtonsoft.Json.dll" />
+    <Content Include="bin\Recaptcha.Web.dll" />
+    <Content Include="bin\RouteDebugger.dll" />
+    <Content Include="bin\StructureMap.dll" />
+    <Content Include="bin\System.Net.Http.Formatting.dll" />
+    <Content Include="bin\System.Web.Helpers.dll" />
+    <Content Include="bin\System.Web.Http.dll" />
+    <Content Include="bin\System.Web.Http.WebHost.dll" />
+    <Content Include="bin\System.Web.Mvc.dll" />
+    <Content Include="bin\System.Web.Razor.dll" />
+    <Content Include="bin\System.Web.WebPages.Deployment.dll" />
+    <Content Include="bin\System.Web.WebPages.dll" />
+    <Content Include="bin\System.Web.WebPages.Razor.dll" />
+    <Content Include="bin\WebActivatorEx.dll" />
+    <Content Include="Content\css\circle.css" />
+    <Content Include="Content\css\InnerCss.css" />
+    <Content Include="Content\css\jquery-ui.css" />
+    <Content Include="Content\css\Main.css" />
+    <Content Include="Content\css\OuterCss.css" />
+    <Content Include="Content\css\popbox.css" />
+    <Content Include="Content\images\Action-Plans.png" />
+    <Content Include="Content\images\action.png" />
+    <Content Include="Content\images\actionlist.png" />
+    <Content Include="Content\images\actionlist1.png" />
+    <Content Include="Content\images\add-128.png" />
+    <Content Include="Content\images\Add.png" />
+    <Content Include="Content\images\addnew.png" />
+    <Content Include="Content\images\add_icon.gif" />
+    <Content Include="Content\images\Add_Icon.png" />
+    <Content Include="Content\images\arrow-down.png" />
+    <Content Include="Content\images\arrow-footer.png" />
+    <Content Include="Content\images\arrow-up.png" />
+    <Content Include="Content\images\arrow.png" />
+    <Content Include="Content\images\arrow1.png" />
+    <Content Include="Content\images\background.png" />
+    <Content Include="Content\images\background1.png" />
+    <Content Include="Content\images\background_old.png" />
+    <Content Include="Content\images\back_over_lay.jpg" />
+    <Content Include="Content\images\banner-text-background.png" />
+    <Content Include="Content\images\banner.png" />
+    <Content Include="Content\images\border.png" />
+    <Content Include="Content\images\Business-Dashboard.png" />
+    <Content Include="Content\images\button.png" />
+    <Content Include="Content\images\Category.png" />
+    <Content Include="Content\images\client.png" />
+    <Content Include="Content\images\client2.png" />
+    <Content Include="Content\images\client3.png" />
+    <Content Include="Content\images\close.png" />
+    <Content Include="Content\images\close_window.png" />
+    <Content Include="Content\images\comment.png" />
+    <Content Include="Content\images\company-name.png" />
+    <Content Include="Content\images\ConfigurationMenu.png" />
+    <Content Include="Content\images\Contactus.png" />
+    <Content Include="Content\images\cross.png" />
+    <Content Include="Content\images\dashboard.png" />
+    <Content Include="Content\images\Data-Security.png" />
+    <Content Include="Content\images\delete.png" />
+    <Content Include="Content\images\delete_grid.png" />
+    <Content Include="Content\images\denied.gif" />
+    <Content Include="Content\images\down_arrow_select.jpg" />
+    <Content Include="Content\images\Edit.jpg" />
+    <Content Include="Content\images\edit.png" />
+    <Content Include="Content\images\email-id.png" />
+    <Content Include="Content\images\employees.png" />
+    <Content Include="Content\images\exclamation-red.png" />
+    <Content Include="Content\images\frist-name.png" />
+    <Content Include="Content\images\Goal-Deployment.png" />
+    <Content Include="Content\images\goal.png" />
+    <Content Include="Content\images\goalhome.png" />
+    <Content Include="Content\images\group-32.png" />
+    <Content Include="Content\images\hierarchy.png" />
+    <Content Include="Content\images\home-background.png" />
+    <Content Include="Content\images\home-icon.png" />
+    <Content Include="Content\images\Home.png" />
+    <Content Include="Content\images\information.png" />
+    <Content Include="Content\images\InnerHomelogo.png" />
+    <Content Include="Content\images\kpi-dashboard.png" />
+    <Content Include="Content\images\KPI-Deployment.png" />
+    <Content Include="Content\images\kpi.png" />
+    <Content Include="Content\images\kpihome.png" />
+    <Content Include="Content\images\Left-arrow.png" />
+    <Content Include="Content\images\logo-1.png" />
+    <Content Include="Content\images\logo.png" />
+    <Content Include="Content\images\logout.png" />
+    <Content Include="Content\images\Manage-Organization.png" />
+    <Content Include="Content\images\map.png" />
+    <Content Include="Content\images\matric-dashboard.png" />
+    <Content Include="Content\images\matric.png" />
+    <Content Include="Content\images\Oragnizations-icon.png" />
+    <Content Include="Content\images\organization.png" />
+    <Content Include="Content\images\package-installed-updated.png" />
+    <Content Include="Content\images\password.png" />
+    <Content Include="Content\images\pencil.png" />
+    <Content Include="Content\images\pen_edit.png" />
+    <Content Include="Content\images\profile-icon.png" />
+    <Content Include="Content\images\ProfileImage_2.png" />
+    <Content Include="Content\images\projects.png" />
+    <Content Include="Content\images\Public_contactus.png" />
+    <Content Include="Content\images\Public_features.png" />
+    <Content Include="Content\images\Public_home.png" />
+    <Content Include="Content\images\register-background.png" />
+    <Content Include="Content\images\register-shadow.png" />
+    <Content Include="Content\images\Right-arrow.png" />
+    <Content Include="Content\images\right-list.png" />
+    <Content Include="Content\images\Root-Cause.png" />
+    <Content Include="Content\images\rootcause.png" />
+    <Content Include="Content\images\search.png" />
+    <Content Include="Content\images\setting.png" />
+    <Content Include="Content\images\shadow.png" />
+    <Content Include="Content\images\Software-Service.png" />
+    <Content Include="Content\images\Target.png" />
+    <Content Include="Content\images\Tick-02.png" />
+    <Content Include="Content\images\tick_64.png" />
+    <Content Include="Content\images\treeview-default.gif" />
+    <Content Include="Content\images\trend.png" />
+    <Content Include="Content\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\images\undercontruction.jpg" />
+    <Content Include="Content\images\undercontruction_.jpg" />
+    <Content Include="Content\images\Upload-image.png" />
+    <Content Include="Content\images\upload-user.png" />
+    <Content Include="Content\images\user-Manage.png" />
+    <Content Include="Content\images\user.png" />
+    <Content Include="Content\images\users.png" />
+    <Content Include="Content\images\video.png" />
+    <Content Include="Content\images\viewpermission.png" />
+    <Content Include="Content\images\X-Matrix.png" />
+    <Content Include="Global.asax" />
+    <Content Include="MailTemplates\InvitationMail.txt" />
+    <Content Include="MailTemplates\InvitationMailToUser.txt" />
+    <Content Include="MailTemplates\PasswordRecoveryMail.txt" />
+    <Content Include="MailTemplates\RegistrationActivationMail.txt" />
+    <Content Include="MailTemplates\RegistrationDeniedMail.txt" />
+    <Content Include="MailTemplates\RegistrationMoreInfoMail.txt" />
+    <Content Include="MailTemplates\RegistrationMail.txt" />
+    <Content Include="RecaptchaNet.ReadMe.txt" />
+    <Content Include="Scripts\AutoComplete.js" />
+    <Content Include="Scripts\EMPMGMT.Admin\EMPMGMT.Admin.AdminProfile.js" />
+    <Content Include="Scripts\EMPMGMT.Admin\EMPMGMT.Admin.RegisteredUsers.js" />
+    <Content Include="Scripts\EMPMGMT.Admin\EMPMGMT.Admin.ViewAdminProfile.js" />
+    <Content Include="Scripts\EMPMGMT.Framework\EMPMGMT.Framework.Common.js" />
+    <Content Include="Scripts\EMPMGMT.Framework\EMPMGMT.Framework.Core.js" />
+    <Content Include="Scripts\EMPMGMT.Framework\EMPMGMT.Framework.DateFormat.js" />
+    <Content Include="Scripts\EMPMGMT.Messages\en-US.js" />
+    <Content Include="Scripts\EMPMGMT.Site\EMPMGMT.Site.ForgotPassword.js" />
+    <Content Include="Scripts\EMPMGMT.Site\EMPMGMT.Site.ResetPassword.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ActionItemDescription.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.UserTimeSheet.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ActionList.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ImportUser.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ManageActionItem.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ManageActionList.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ManageCategory.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ManageUser.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.OrganizationUnits.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ProfileDetail.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.Profiles.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ProjectList.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.Roles.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.uploaduser.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.UserDetail.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.UserProfile.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.ViewUserProfile.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.UserDocument.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.LeaveDetail.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.SaveApplyLeaveRec.js" />
+    <Content Include="Scripts\file-upload\jquery.form.js" />
+    <Content Include="Scripts\file-upload\jquery.iframe-transport.js" />
+    <Content Include="Scripts\file-upload\jquery.uploadfile.js" />
+    <Content Include="Scripts\file-upload\uploadfile.min.css" />
+    <Content Include="Scripts\HighChart\exporting.js" />
+    <Content Include="Scripts\HighChart\highcharts.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-ui-1.9.2.js" />
+    <Content Include="Scripts\jquery-ui.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\JsColor\arrow.gif" />
+    <Content Include="Scripts\JsColor\cross.gif" />
+    <Content Include="Scripts\JsColor\hs.png" />
+    <Content Include="Scripts\JsColor\hv.png" />
+    <Content Include="Scripts\JsColor\jscolor.js" />
+    <Content Include="Scripts\knockout-3.0.0.js" />
+    <Content Include="Scripts\knockout.mapping.js" />
+    <Content Include="Scripts\knockout.validation.min.js" />
+    <Content Include="Scripts\Popup.js" />
+    <Content Include="Scripts\progress-circle.js" />
+    <Content Include="Scripts\raphael-min.js" />
+    <Content Include="Scripts\Treed\d3.css" />
+    <Content Include="Scripts\Treed\d3.v3.min.js" />
+    <Content Include="Scripts\EMPMGMT.User\EMPMGMT.User.TimeSheet.js" />
+    <Content Include="Uploads\ActionList\Chrysanthemum201410221057488783.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221036227387.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221036306882.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221038020384.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221038595997.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221039342607.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221040315719.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221040351421.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221040386563.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221040411985.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221047319220.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221052023415.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221052170593.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221052246137.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221054396965.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221056223493.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221056249595.jpg" />
+    <Content Include="Uploads\ActionList\Penguins201410221057091110.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221036342154.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221039034339.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221039273053.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221040091017.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221041094421.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221042535711.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221048430401.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221049106796.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221049136008.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221052202995.jpg" />
+    <Content Include="Uploads\ActionList\Tulips201410221054363813.jpg" />
+    <Content Include="Uploads\User\Chrysanthemum201411051446500559.jpg" />
+    <Content Include="Uploads\User\Desert201411031231078660.jpg" />
+    <Content Include="Uploads\User\Penguins201411031229052690.jpg" />
+    <Content Include="Uploads\User\ProfileImage_0.jpg" />
+    <Content Include="Uploads\User\ProfileImage_598.jpg" />
+    <Content Include="Uploads\User\ProfileImage_600.jpg" />
+    <Content Include="Uploads\User\ProfileImage_601.jpg" />
+    <Content Include="Uploads\User\ProfileImage_602.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="assets\javascripts\forms\" />
+    <Folder Include="assets\vendor\bootstrap-colorpicker\css\" />
+    <Folder Include="assets\vendor\bootstrap-colorpicker\img\bootstrap-colorpicker\" />
+    <Folder Include="assets\vendor\bootstrap-colorpicker\js\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\prop-base\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\props\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\text-base\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\tmp\prop-base\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\tmp\props\" />
+    <Folder Include="assets\vendor\magnific-popup\.svn\tmp\text-base\" />
+    <Folder Include="assets\vendor\select2\" />
+    <Folder Include="Models\" />
+    <Folder Include="Uploads\ActionItem\" />
+    <Folder Include="Uploads\Employee\" />
+    <Folder Include="Uploads\Goal\" />
+    <Folder Include="Uploads\Metric Dashboard\" />
+    <Folder Include="Uploads\Project\ActionItem\" />
+    <Folder Include="Uploads\Project\ActionList\" />
+    <Folder Include="Uploads\RCA\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EMPMGMT.Business\EMPMGMT.Business.csproj">
+      <Project>{a422ccc8-634d-47d5-9490-0f93218fa609}</Project>
+      <Name>EMPMGMT.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMPMGMT.Domain\EMPMGMT.Domain.csproj">
+      <Project>{47e20ff1-d35a-4cbc-9d99-a3f86fd15c65}</Project>
+      <Name>EMPMGMT.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EMPMGMT.Utility\EMPMGMT.Utility.csproj">
+      <Project>{391b775c-e46e-4cae-b688-50e0f1c7e39c}</Project>
+      <Name>EMPMGMT.Utility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Site\Register.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\_LayoutAdmin.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Admin\RegisteredUsers.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Site\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Site\ForgotPassword.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Mvc.sitemap">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="assets\ajax\ajax-datatables-sample.json" />
+    <Content Include="assets\ajax\ajax-treeview-children.json" />
+    <Content Include="assets\ajax\ajax-treeview-roots.json" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\package.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\README.md" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.button.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.core.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.draggable.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.droppable.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.mouse.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.resizable.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.slider.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.spinner.jquery.json" />
+    <Content Include="assets\vendor\jquery-ui\development-bundle\ui.widget.jquery.json" />
+    <None Include="MvcSiteMapSchema.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\EMPMGMT.pubxml" />
+    <None Include="Properties\PublishProfiles\STRATEGY.Publish.pubxml" />
+    <Content Include="Views\Site\Index.cshtml" />
+    <Content Include="Views\Admin\Home.cshtml" />
+    <Content Include="Views\Site\AdminLogin.cshtml" />
+    <Content Include="Views\Shared\_LayoutHomeNew.cshtml" />
+    <Content Include="Views\Site\Contactus.cshtml" />
+    <Content Include="Views\Site\Features.cshtml" />
+    <Content Include="Views\Site\ResetPassword.cshtml" />
+    <Content Include="Views\Admin\ViewAdminProfile.cshtml" />
+    <Content Include="Views\Admin\AdminProfile.cshtml" />
+    <Content Include="Views\Error\AccessDenied.cshtml" />
+    <Content Include="Views\Error\Internal.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <None Include="Properties\PublishProfiles\Strategy.pubxml" />
+    <None Include="Properties\PublishProfiles\StrategyDeployment.pubxml" />
+    <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\MetaRobotsHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapNodeModelList.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapPathHelperModel.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\SiteMapTitleHelperModel.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+    <Content Include="Uploads\Sample.xlsx" />
+    <Content Include="Views\Employee\ActionItemDescription.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Employee\ActionList.cshtml" />
+    <Content Include="Views\Employee\AddEditActionItem.cshtml" />
+    <Content Include="Views\Employee\AddEditProjectDetails.cshtml" />
+    <Content Include="Views\Employee\AddProject.cshtml" />
+    <Content Include="Views\Employee\AutoComplete.cshtml" />
+    <Content Include="Views\Employee\CreateProfileType.cshtml" />
+    <Content Include="Views\Employee\EditProfileType.cshtml" />
+    <Content Include="Views\Employee\Home.cshtml" />
+    <Content Include="Views\Employee\Importuser.cshtml" />
+    <Content Include="Views\Employee\ManageActionItem.cshtml" />
+    <Content Include="Views\Employee\ManageActionList.cshtml" />
+    <Content Include="Views\Employee\ManageCategory.cshtml" />
+    <Content Include="Views\Employee\ManageUser.cshtml" />
+    <Content Include="Views\Employee\OrganizationUnits.cshtml" />
+    <Content Include="Views\Employee\ProfileDetail.cshtml" />
+    <Content Include="Views\Employee\Profiles.cshtml" />
+    <Content Include="Views\Employee\ProjectDetail.cshtml" />
+    <Content Include="Views\Employee\ProjectList.cshtml" />
+    <Content Include="Views\Employee\Roles.cshtml" />
+    <Content Include="Views\Employee\uploaduser.cshtml" />
+    <Content Include="Views\Employee\UserDetails.cshtml" />
+    <Content Include="Views\Employee\UserProfile.cshtml" />
+    <Content Include="Views\Employee\User_Form.cshtml" />
+    <Content Include="Views\Employee\ViewUserProfile.cshtml" />
+    <Content Include="Views\Shared\_LayoutInfo.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Employee\TimeSheet.cshtml" />
+    <Content Include="Views\Employee\ActionItemDetail.cshtml" />
+    <Content Include="Views\Employee\Leave.cshtml" />
+    <Content Include="Views\Employee\UserTimeSheet.cshtml" />
+    <Content Include="Uploads\Sample1.xlsx" />
+    <Content Include="Views\Employee\FillReview.cshtml" />
+    <Content Include="Views\Employee\ApplyLeave.cshtml" />
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>3493</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:1545</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.0\tools\AutoMapper.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,213 @@
+﻿@model EMPMGMT.Web.ViewModels.ActionListVM
+@using EMPMGMT.Utility;
+@{
+    ViewBag.Title = "Action List";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+@section scripts {
+    @*    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>*@
+    @*   <script src="@Url.Content("~/Scripts/Popup.js")"></script>*@
+    <script src="@Url.Content("~/Scripts/AutoComplete.js")"></script>
+    <script src="~/Scripts/file-upload/jquery.uploadfile.js"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/file-upload/jquery.form.js")"></script>
+    <link href="~/Scripts/file-upload/uploadfile.min.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.ActionList.js")" type="text/javascript"></script>
+    @*<link href="~/Content/css/popbox.css" rel="stylesheet" />*@
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ActionList.pageLoad();
+}
+<div class="row pr-md text-right">
+    <a class="btn btn-primary redirectBack"  onclick="javascript:window.history.go(-1);">Back</a>
+</div>
+@using (Html.BeginForm("ActionList", "Employee"))
+{
+               
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.ActionListId, new { id = "hdnActionListId" })
+
+    @Html.HiddenFor(model => model.ProjectId, new { id = "hdnProjectId" })
+
+    @ViewBag.ProjectId
+    <div class="row mt-sm">
+        <div class="col-md-12">
+            <section class="panel">
+                <header class="panel-heading">
+                    <div class="panel-actions">
+                    </div>
+                    <h2 class="panel-title">
+                        @if (Model.ActionListId == null)
+                        {
+                            <span>Create&nbsp</span>
+                        }
+                        else
+                        {
+                            <span>Edit&nbsp</span>
+                        }
+                        Action List
+                    </h2>
+                </header>
+                <div class="panel-body">
+                    <div class="form-horizontal">
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Title <span class="required">*</span> </label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.Title, new { @class = "form-control", @maxlength = "50" })
+                                <span class="error">@Html.ValidationMessageFor(model => model.Title)</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Responsible <span class="required">*</span> </label>
+                            <div class="col-md-6">
+                                @Html.TextBoxFor(model => model.ResponsibleUserName, new { @class = "form-control _ResponsibleUserAutoComplete", @maxlength = "200" })
+                                @Html.HiddenFor(model => model.ResponsibleUserId, new { id = "hdnResponsibleUserId" })
+                                <span class="error">@Html.ValidationMessageFor(model => model.ResponsibleUserName)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Overall Status</label>
+                            <div class="col-md-6">
+                                @Html.RadioButtonFor(m => m.Status, "3", new { @checked = true }) Green
+                                @Html.RadioButtonFor(m => m.Status, "2") Amber
+                                @Html.RadioButtonFor(m => m.Status, "1") Red
+                                <span class="error">@Html.ValidationMessageFor(model => model.Status)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Objective</label>
+                            <div class="col-md-6">
+                                @Html.TextAreaFor(model => model.Objective, new { @class = "form-control" })
+                                <span class="error">@Html.ValidationMessageFor(model => model.Objective)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Risk Issues</label>
+                            <div class="col-md-6">
+                                @Html.TextAreaFor(model => model.RiskIssues, new { @class = "form-control" })
+                                <span class="error">@Html.ValidationMessageFor(model => model.RiskIssues)</span>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Description</label>
+                            <div class="col-md-6">
+                                @Html.TextAreaFor(model => model.Description, new { @class = "form-control" })
+                                <span class="error">@Html.ValidationMessageFor(model => model.Description)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <footer class="panel-footer pl-none pr-none">
+                    <div class="form-group">
+                        <div class="col-md-3 control-label"></div>
+                        <div class="col-md-6 text-right">
+                            <input type="submit" class="button btn btn-primary permissionbased" data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_LIST, Constants.PERMISSION_EDIT)" value="Save" />
+                            <a class="btn btn-primary redirectBack" onclick="javascript:window.history.go(-1);">Cancel</a> @*@Model.Url*@
+
+                        </div>
+                    </div>
+                </footer>
+            </section>
+        </div>
+    </div>
+}
+
+@* End *@
+
+<div class="ActionlistDoc-OuterDiv displaynone row" data-bind="css: { 'displayblock': DocumentDivVisible } ">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Attach file </label>
+                        <div class="col-md-6">
+                            <input type="file" value="Upload" name="fileupload" id="fileupload" />
+                            <input type="button" class="button btn btn-primary mt-xs" id="ButtonUploadUser" value="Upload Documents" />
+                        </div>
+                    </div>
+                </div>
+                <br />
+                <div class="table-responsive">
+                    <table summary="Documents" class="table table-bordered mb-none tableDocument" id="hor-zebra">
+                        <thead>
+                            <tr class="primary">
+                                <th scope="col">Document Name</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="template: { name: 'AssociatedDashboardDocumentsTemplate', foreach: DashboardDocumentsList }">
+                        </tbody>
+                        <tr class="_DocumentsNoRecord displaynone">
+                            <td><b>No Record Found</b></td>
+                        </tr>
+
+                    </table>
+                    <div class="pager _RCADocumentsPager marL4px"></div>
+                </div>
+
+                @* <div style="margin-left: 168px;" data-bind="template: { name: 'AssociatedDashboardDocumentsTemplate', foreach: DashboardDocumentsList }">*@
+            </div>
+
+        </section>
+    </div>
+</div>
+
+
+
+
+
+@* <script type="text/html" id="AssociatedDashboardDocumentsTemplate">
+            <div style="line-height: 33px;" class="documentListDiv  w350px" data-bind="event: { mouseover: DocumentMouseOver, mouseleave: DocumentMouseLeave }">
+                <a class="floatleft" style="cursor: pointer" data-bind="attr: { href: DownloadDocument }">
+                    <span data-bind="text: DocumentName"></span>
+                </a>
+                <img class="push-right padT10px" style="cursor: pointer;" title="Delete File" data-bind="visible: DeleteDocumentVisible, click: DeleteDocument" src="/Content/images/DeleteGrey.png" height="14" width="14" />
+               
+                <div class="clear"></div>
+
+                   <div class="metricDashboard-AttachedByName"><span><b>Created By:</b> </span><span data-bind="text: AttachedByName"></span></div>
+
+            </div>
+            <div class="clear"></div>
+        </script>*@
+<script type="text/html" id="AssociatedDashboardDocumentsTemplate">
+    <tr>
+        <td>
+            <a title="DownLoad File" data-bind="text: DocumentName, attr: { href: DownloadDocument, target: '_blank' }"></a>
+        </td>
+        <td>
+            <a href="javascript:void(0)" data-bind="click: DeleteDocument" class="permissionbased" data-permission="@string.Concat(Constants.MODULE_Documents, Constants.PERMISSION_DELETEDOCUMENT)" title="Delete File">@*data-bind="visible: DeleteDocumentVisible, click: DeleteDocument"*@
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </td>
+
+    </tr>
+
+    @*            <div style="line-height: 33px;" class="documentListDiv  w350px" data-bind="event: { mouseover: DocumentMouseOver, mouseleave: DocumentMouseLeave }">
+                <a class="floatleft" style="cursor: pointer" data-bind="attr: { href: DownloadDocument }">
+                    <span data-bind="text: DocumentName"></span>
+                </a>
+                <img class="push-right padT10px" style="cursor: pointer;" title="Delete File" data-bind="visible: DeleteDocumentVisible, click: DeleteDocument" src="/Content/images/DeleteGrey.png" height="14" width="14" />
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>*@
+</script>
+@*<style>
+    #slider2 { width: 800px; }
+
+    .steps-2 { border: 1px solid transparent; /*follows #slider2 style for sizing purposes */ width: 260px; position: relative; height: 30px; }
+
+    .tick { border: 1px solid transparent; /*follows slide handle style for sizing purposes*/ position: absolute; width: 1.2em; margin-left: -.6em; text-align: center; left: 0; }
+
+    .right-container-full .input-type-text { border: 1px solid #ccc; height: 20px; padding: 5px; width: 100%; }
+    .right-container-full .input-type-textarea { border: 1px solid #ccc; height: 60px; padding: 5px; width: 100%; resize: vertical; }
+
+    .right-container-full { width: 644px; }
+    .displayblock { display: block !important; }
+    .right-container-button { margin: 8px 0 0 20px!important; }
+</style>*@

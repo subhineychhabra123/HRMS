@@ -1,0 +1,145 @@
+﻿@using Recaptcha.Web.Mvc;
+@using EMPMGMT.Utility;
+@using EMPMGMT.Web.Infrastructure;
+
+
+@model EMPMGMT.Web.ViewModels.RegistrationVM
+
+
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>EMPMGMT Deployment | Registration-Form</title>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/OuterCss.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+</head>
+<body>
+    @if (ViewBag.success == true)
+    {
+        <div class="message-success">
+
+            @Html.Raw(Convert.ToString(ViewBag.RegistrationSuccessWelComeMessage))
+
+        </div>
+        <script>
+           
+            setTimeout(function () {
+                location.href = "/Home";
+            }
+      , 10000);
+
+        </script>
+    }
+
+    @using (Html.BeginForm("Register", "Site"))
+    {
+        @Html.AntiForgeryToken()
+        <div class="back">
+            <div class="cantrol-hold">
+                <div class="control-group1">
+                    <div class="login-logo1">
+                        <a href="/Home">
+                            <img src="/content/images/logo.png" alt="" title=""></a>
+                    </div>
+                   
+                    <div class="cantrol-value1">
+                        <span class="lable1"></span>
+                        <span class="input2">
+
+
+                            <div class="error-msg-height">
+                                <span class="field-validation-error">
+                                    @if (ViewBag.success == true)
+                    {
+                        <div class="msgsuccess">
+                            @Html.Raw(ViewBag.StatusMessage)
+                        </div>        
+                    }
+                    else
+                    {
+                        <div class="msgfail">
+                            @Html.Raw(ViewBag.StatusMessage)
+                        </div>        
+                                
+                    }
+                                </span>
+                            </div>
+                          </span>
+                        <div class="clear"></div>
+                    </div>
+                   
+                    
+
+                    <div class="cantrol-value1">
+                        <span class="lable1">First Name<span class="required">*</span></span>
+                        <span class="input2">
+
+
+                            <div class="error-msg-height">
+                                <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="FirstName">
+                                    <span class="" for="FirstName"></span>
+                                </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.FirstName, new { maxlength = 50 })</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">Last Name</span>
+                        <span class="input2">
+                            <div class="error-msg-height">
+                                @* @Html.ValidationMessageFor(m => m.LastName)*@
+                            </div>
+                            @Html.TextBoxFor(m => m.LastName, new { maxlength = 50 })</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">Company<span class="required">*</span></span>
+                        <span class="input2">
+                            <div class="error-msg-height">
+                                @Html.ValidationMessageFor(m => m.Company.CompanyName)
+                            </div>
+                            @Html.TextBoxFor(m => m.Company.CompanyName, new { maxlength = 50 })</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">Email Id<span class="required">*</span></span>
+                        <span class="input2">
+                            <div class="error-msg-height">
+                                @Html.ValidationMessageFor(m => m.EmailId)
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailId, new { maxlength = 50 })</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">Message</span>
+                        <span class="input2">
+                            <div class="error-msg-height">
+                                @Html.ValidationMessageFor(m => m.UserNote)
+                            </div>
+                            @Html.TextAreaFor(m => m.UserNote, new { maxlength = 1000, @autocomplete = "off",@class="resizer"} )</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="right1">
+                        <input type="submit" id="register" value=" Register" class="button1 _one-click-submit-button" />
+
+                        <a href="/login" class="forgot-password">Already have an Account?</a>
+
+
+                    </div>
+                    <div class="clear"></div>
+                    <div class="shadow1">
+                        <img src="/content/images/register-shadow.png" alt="" title="">
+                    </div>
+                    <div class="copy-right1">copyright</div>
+                </div>
+
+            </div>
+        </div>
+
+    }
+</body>
+</html>

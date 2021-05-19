@@ -1,0 +1,35 @@
+﻿@{
+   
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+    <title>EMPMGMT Deployment | Imprt User </title>
+}
+
+@section scripts {
+
+    <script src="~/Scripts/file-upload/jquery.uploadfile.js"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/file-upload/jquery.form.js")"></script>
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.uploaduser.js")" type="text/javascript"></script>
+    <link href="~/Scripts/file-upload/uploadfile.min.css" rel="stylesheet" />
+}
+
+
+@section ReadyScripts
+{
+
+EMPMGMT.User.uploaduser.pageLoad();
+    }
+<h2>Import</h2>
+
+<table>
+    <tr>
+        <td>Excel file</td>
+        <td>
+            <input type="file" name="fileupload" id="fileupload" />
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <input type="button" id="ButtonImportUser" value="Upload Users" /></td>
+    </tr>
+</table>
+

@@ -1,0 +1,125 @@
+﻿@*@model List<EMPMGMT.Web.ViewModels.CategoryVM>*@
+@{
+    ViewBag.Title = "ManageCategory";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.ManageCategory.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/Popup.js")"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ManageCategory.pageLoad();
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <a  data-toggle="modal" data-target="#CreateCategory"  data-permission="@string.Concat(EMPMGMT.Utility.Constants.MODULE_CATEGORY, EMPMGMT.Utility.Constants.PERMISSION_CREATE)"  class="btn btn-primary pull-right  _categoryOpen permissionbased" data-bind="click: CreateCategoryAction">Create</a>
+    </div>
+</div>
+<div class="row">
+
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div id="ProfiesContainer" class="table-responsive dataTables_wrapper">
+                    <table class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                        <thead>
+                            <tr class="primary">
+                                <!-- ko foreach:TableHeaders   -->
+                                <th class="sorting" scope="col" data-bind="html: ColumnText, click: Sort, css: SortOrder"></th>
+                                <!-- /ko -->
+                                <th scope="col" class="actionLink ">Action</th>
+                            </tr>
+
+
+
+                        </thead>
+                        <tbody data-bind="template: { name: 'CategoryTemplate', foreach: CategoryList }">
+                        </tbody>
+                        <tr class="_CategoryNoRecord displaynone">
+                            <td colspan="4"><b>No Record Found</b></td>
+                        </tr>
+                        <script type="text/html" id="CategoryTemplate">
+
+                            <tr>
+                                <td>
+
+                                    <div data-bind="text: CategoryName"></div>
+                                </td>
+                                <td class="actions actionLinks">
+                                    <a class="_categoryOpen permissionbased" data-toggle="modal" data-target="#CreateCategory" data-permission="@string.Concat(EMPMGMT.Utility.Constants.MODULE_CATEGORY, EMPMGMT.Utility.Constants.PERMISSION_EDIT)"  data-bind="click: EditCategoryScreen" href=""><i class="fa fa-pencil"></i></a>
+                                    <a class="permissionbased" href="" data-bind="click: DeleteCategory"  data-permission="@string.Concat(EMPMGMT.Utility.Constants.MODULE_CATEGORY, EMPMGMT.Utility.Constants.PERMISSION_DELETE)"><i class="fa fa-trash-o"></i></a>
+                                </td>
+                            </tr>
+                        </script>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
+
+
+<!-- Create /Edit Category Pop-Up Div  -->
+
+
+<div class="modal fade" id="CreateCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog ">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close _categoryClose" id="categoryBoxClose" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title _categoryHeader">Create Category</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+
+                    <label class="col-sm-3 control-label">
+                        Title
+ <span class="required">*</span></label>
+                    <div class="col-sm-9">
+                        <input type="text" data-bind="value: Category.CategoryName" class="form-control">
+                        <label class="error" data-bind="validationMessage: Category.CategoryName"></label>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <div class="col-sm-12">
+                    <a id="btnSave" data-bind="click: SaveCategory" data-permission="@string.Concat(EMPMGMT.Utility.Constants.MODULE_CATEGORY, EMPMGMT.Utility.Constants.PERMISSION_EDIT)" class="btn btn-primary permissionbased">Save</a>
+                    <a class="btn btn-default _categoryClose" data-dismiss="modal">Cancel</a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

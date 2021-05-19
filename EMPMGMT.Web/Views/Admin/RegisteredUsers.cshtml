@@ -1,0 +1,359 @@
+﻿@{
+    ViewBag.Title = "RegisteredUsers";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@section scripts {
+
+    <script src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script src="~/Scripts/Popup.js"></script>
+    <script src="@Url.Content("~/Scripts/EMPMGMT.Admin/EMPMGMT.Admin.RegisteredUsers.js")" type="text/javascript"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+}
+
+
+@section ReadyScripts
+{
+EMPMGMT.Admin.RegisteredUsers.pageLoad();
+}
+
+<h2>Users</h2>
+ <div class="right-container searchInput">
+        <input type="text" id="txtsearch"  data-bind="value:SearchText" class="input-type-text _SearchTxt " /><span class="marL7px marT2px"></span><input value="Search" class="buttonSearch " type="button" data-bind="click: FilteredData" />
+ </div>
+<div class="clear"></div>
+<div id="RegisteredUsersContainer">
+    <div id="Usersfiltercontainer" class="tab">
+        <ul id="Filterlist" class="filterlist" data-bind="foreach: RegisteredUsersFilterList">
+            <li data-bind="click: $root.FilterUsers, css: ActiveClass"><a data-bind="css: ActiveClass, text: DisplayText, attr: {title: Title}" href="#"></a></li>
+                
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div class="contantTab">
+        <table summary="Registered Users" class="table" id="hor-zebra">
+            <thead>
+                <tr data-bind="template: { name: 'AdminUsersHeader', foreach: TableHeaders }"></tr>
+                @* <th class="w35pc" scope="col">Name</th>
+                    <th  class="w35pc" scope="col">Email Id</th>
+                    <th   scope="col">Registration Date</th>
+                  
+                    <th  class="w10pc"  data-bind="visible:ShowActionTh" scope="col">Action</th>*@
+            </thead>
+            <tbody data-bind="template: { name: 'RegisteredUsersTemplate', foreach: RegisteredUsersList }">
+            </tbody>
+            <tr class="_RegisteredUsersNoRecord">
+                <td colspan="4"><b>No Record Found</b></td>
+            </tr>
+        </table>
+        <div class="pager _RegisteredUsersPager"></div>
+    </div>
+</div>
+<script type="text/html" id="AdminUsersHeader">
+    <th scope="col" data-bind="text: ColumnText, click: Sort, css: SortOrder, visible:Visibility"></th>
+</script>
+<script type="text/html" id="RegisteredUsersTemplate">
+    <tr>
+        @*<td>
+           <div data-bind="text: ProfileId"></div>
+        </td>*@
+        <td class="w35pc">
+            @*  <a data-bind="    attr: { href: View, title: FullName }"><span data-bind="    text: FullName"></span></a>*@
+            <a title="View" class="_userDetailOpen" data-bind="attr: { href: View }, click: $root.ViewRegisteredUserDetail,text:FullName"></a>
+        </td>
+        <td class="w35pc">
+            <div data-bind="text: EmailId"></div>
+        </td>
+        <td>
+            <div data-bind="text: RegistrationDate"></div>
+        </td>
+        @* <td>
+            <input type="checkbox" disabled="disabled" data-bind="checked: Active" />
+
+        </td>*@
+        <td data-bind="visible:ShowActionTd" class="w10pc" >
+            
+
+            <a title="View" data-bind="attr: { href: View }, click: MethodName"><span data-bind="    text: ActionType,visible:IsActiveDeactive"></span></a>
+            &nbsp;
+                 <a title="View" class="mousehover" data-bind="click:$root.ResendMail,visible:IsResend">Resend</a>
+             <a title="View" @*data-bind="attr: { href: View }"*@ data-bind="click: $root.ViewRegisteredUserDetail,visible:IsEditLink" class="_userActivation mousehover"><span >Edit</span></a>
+                </td>
+    </tr>
+</script>
+<div id="userdetails" class="popbox _userDetailPopbox fixed-popbox">
+    <div class="box _popboxcontainer  _userDetailbox" style="display: none">
+        <span class="close _userDetailClose">
+
+            <span class="close"><a href="javascript:void(0)">
+                <img class="boxclose _userDetailClose" id="UserDetailBoxClose" src="~/Content/images/close.png" align="" title="" /></a></span>
+        </span>
+        <div class="head-popup">
+            <div id="UsersfiltercontainerComment" class="tab">
+                <ul id="FilterlistComment" class="filterlist" data-bind="foreach:UsersCommentList">
+                    <li data-bind="click: $root.UserComment, css: ActiveClass"><a data-bind="    css: ActiveClass, text: DisplayText, attr: {title: Title}" href="#"></a></li>
+                </ul>
+                <div class="clear"></div>
+            </div>
+
+
+
+
+
+            <div class="clear"></div>
+        </div>
+        <div class="contant">
+            <div id="userdiv">
+
+
+
+                <div class="control-group1">
+                    <div class="display-label">
+                        <label>First Name</label>
+                    </div>
+                    <div class="display-value">
+                        <div data-bind="text: RegisteredUser.FirstName"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="control-group1">
+                    <div class="display-label">
+                        <label>Last Name</label>
+                    </div>
+                    <div class="display-value">
+                        <div data-bind="text: RegisteredUser.LastName"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="control-group1">
+                    <div class="display-label">
+                        <label>Email Id</label>
+                    </div>
+                    <div class="display-value">
+                        <div data-bind="text: RegisteredUser.EmailId"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="control-group1">
+                    <div class="display-label">
+                        <label>Company</label>
+                    </div>
+                    <div class="display-value">
+                        <div data-bind="text: RegisteredUser.CompanyName"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="control-group1">
+                    <div class="display-label">
+                        <label>Note</label>
+                    </div>
+                    <div class="display-value">
+                        <div data-bind="text: RegisteredUser.UserNote"></div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div id="dvadmincomment" style="display: none;" class="control-group1">
+                    <div class="display-label">
+                        <label>Admin Comments</label>
+                    </div>
+                    <div class="display-value">
+                        <div class="Comments">
+                            <textarea class="input-type-textarea-resize" data-bind="value: RegisteredUser.Comments"></textarea>
+                        </div>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="tab-button" data-bind="visible: RegisteredUser.ShowAllActionButtons">
+
+            <input id="btnactive" type="button" class="_userActivation" value="Activate" />
+            <input id="btndenied" type="button" data-bind="{visible: RegisteredUser.ShowDeniedButton,click: DeActivateRegisterdUser}" value="Deny" />
+            <input type="button" title="On clicking this button an email will be sent to user regarding the more information about user." data-bind="click: RequestForMoreInfoAboutRegisteredUser" value="Request More Information?" />
+
+                </div>
+
+
+            </div>
+            <div id="usercomment" style="display: none;">
+
+
+                <form id="myformComment">
+
+                    <fieldset class="control-group-container">
+                        <legend>Comments</legend>
+
+
+                        <div class="commentboxcss">
+
+
+                            <div class="control-container">
+
+                                <div class="contantTab">
+                                    <table summary="Registered Users" width="100%" id="hor-zebra-comment">
+
+                                        <tbody data-bind="template: { name: 'RegisteredUsersCommentTemplate', foreach: RegisteredUsersCommentList }">
+                                        </tbody>
+                                        <tr class="_RegisteredUsersCommentNoRecord displaynone">
+                                            <td colspan="4"><b>No Record Found</b></td>
+                                        </tr>
+                                    </table>
+
+                                    <div id="divNoRecord"></div>
+                                </div>
+
+                                <script type="text/html" id="RegisteredUsersCommentTemplate">
+                                    <tr>
+
+                                        <td>
+                                            <table width="100%">
+                                                <tr>
+                                                    <td class="admincommentstyle" colspan="2">
+                                                        <div data-bind="text: Comments"></div>
+
+                                                    </td>
+                                                </tr>
+                                                <tr align="right">
+                                                    <td width="80%">
+                                                        <table width="100%">
+                                                            <tr>
+                                                                <td>Date
+                                                                    <div data-bind="text: CommentDate"></div>
+                                                                </td>
+                                                                <td>Comment By 
+                                                                    <div data-bind="text: CommentByName"></div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+
+
+                                                    </td>
+                                                    <td width="20%">
+                                                        <a title="Edit" class="mousehover edit-icon" data-bind="click: $root.BindEditComment"></a>
+                                                        <a title="Delete" class="mousehover delete-icon" data-bind="click: $root.DeleteComment"></a>
+
+                                                        <div style="display: none;" id="dvcommentid" data-bind="text: CommentId"></div>
+
+                                                    </td>
+
+                                                </tr>
+
+                                            </table>
+
+
+
+
+                                        </td>
+                                    </tr>
+                                </script>
+                            </div>
+
+
+
+
+
+
+
+
+                        </div>
+                    </fieldset>
+                    <fieldset class="control-group-container">
+                        <legend>Write Comment<span class="required">*</span></legend>
+                        <div class="display-value">
+                            <div class="Comments">
+
+                                <textarea data-bind="value:RegisteredUser.Comments"></textarea>
+
+
+
+                            </div>
+
+
+                        </div>
+
+                    </fieldset>
+                    <div class="tab-button">
+                        <input type="button" data-bind="click:SaveComment,value:RegisteredUser.btnvalue" />
+                        <input type="button" data-bind="click:CancelComment" value="Reset" />
+
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div id="fade" class="popup_overlay _popup_overlay"></div>
+<div id="cfade" class="popup_overlay _configurationpopup_overlay"></div>
+<form id="myform">
+    <div class='popbox _configurationpopbox fixed-popbox'>
+        <div class='box _popboxcontainer _userConfigurationbox displaynone '>
+            <div style="width: 427px;">
+
+                <fieldset class="control-group-container">
+                    <legend>Grant Access To <span class="required">*</span></legend>
+                    <div class="control-group1">
+                        <div class="display-checkbox">
+                            <input type="checkbox" data-bind="checked: RegisteredUser.AccessForGoalModule" class="checkbox" />Goal Management
+                        </div>
+                        <div class="display-checkbox">
+                            <input type="checkbox" data-bind="checked: RegisteredUser.AccessForKPIModule" class="checkbox" />KPI Management
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="control-group-container">
+                    <legend>Access Type</legend>
+                    <div class="control-group1">
+                        <div class="display-radio">
+                            <label>
+                                <input type="radio" data-bind="checked: RegisteredUser.AccessIsTrialBased.ForEditing" value="true" class="radio" name="t" />Trial Account</label>
+                        </div>
+                        <div class="display-radio">
+                            <label>
+                                <input type="radio" data-bind="checked: RegisteredUser.AccessIsTrialBased.ForEditing" value="false" class="radio" name="t" />Activate Account</label>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset class="control-group-container">
+                    <legend>Access Period</legend>
+
+
+                    <div>
+
+
+                        <div class="control-container" data-bind="validationOptions: { insertMessages: false }">
+                            <div class="left-container">
+                                From<span class="required">*</span>
+                            </div>
+                            <div class="right-container">
+                                <div class="error-container"><span data-bind="validationMessage: RegisteredUser.AccessPeriodFrom"></span></div>
+                                <input id="txtfromdate" data-bind="datepicker: RegisteredUser.AccessPeriodFrom" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+
+                        <div class="control-container" data-bind="validationOptions: { insertMessages: false }">
+                            <div class="left-container">
+                                To<span class="required">*</span>
+                            </div>
+                            <div class="right-container">
+                                <div class="error-container"><span data-bind="validationMessage: RegisteredUser.AccessPeriodTo"></span></div>
+                                <input id="txttodate" data-bind="datepicker: RegisteredUser.AccessPeriodTo" />
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="tab-button">
+                    <input type="button" data-bind="click:ActiveRegisteredUser" value="Submit" />
+                    <input type="button" class="_userConfigurationClose" value="Cancel" />
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+

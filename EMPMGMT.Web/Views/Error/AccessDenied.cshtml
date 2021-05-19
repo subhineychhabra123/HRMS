@@ -1,0 +1,21 @@
+﻿@{
+    ViewBag.Title = "Access Denied";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+<h2>Access Denied</h2>
+<div class="buttoncontainer clear-both floatright">
+  <a href="@Request.UrlReferrer"><input type='button'class="button purple  small normal" value="Back" /></a>  
+</div>
+<div class="clear pad5px"></div>
+<div class="accessdenied">
+
+    <img src="~/Content/images/denied.gif" />
+    <br />
+    <br />
+    <br />
+    You do not have sufficient privileges to complete this action. Please contact your Administrator.
+</div>
+
+<style type="text/css">    
+    .form-section{ visibility: hidden!important; }
+</style>

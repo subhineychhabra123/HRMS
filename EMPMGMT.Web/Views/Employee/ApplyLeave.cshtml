@@ -1,0 +1,158 @@
+﻿@{
+   // ViewBag.Title = "ApplyLeave";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+@section ReadyScripts
+{
+   
+EMPMGMT.User.SaveApplyLeaveRec.pageLoad();
+   
+}
+
+
+  
+ <script src="~/Scripts/EMPMGMT.User/EMPMGMT.User.SaveApplyLeaveRec.js" defer="defer"></script>
+<script src="@Url.Content("~/Scripts/Popup.js")"></script>
+    <script src="~/Scripts/AutoComplete.js"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+
+
+
+
+ <div class="row">   
+        <div class="col-md-12">
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table summary="Manage Users" class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                            <thead>
+                                <tr class="primary">
+                                    
+                                    <th class="sorting" scope="col" @*data-bind="html: ColumnText, click: Sort, css: SortOrder"*@>Apply TO</th>
+                                   
+                                    <th scope="col" @*class="actionLink"*@>Leave Type</th>
+                                </tr>
+                            </thead>
+                            <tbody data-bind="template: { name: 'CompanyUsersTemplate' }">
+                            </tbody>
+                            <tr class="_ProfilesNoRecord" style="display: none">
+                                <td colspan="4"><b>No Record Found</b></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="pull-left _CompanyUsersPager">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+<script type="text/html" id="CompanyUsersTemplate">
+    <tr>
+        <td >
+          <div >
+               <input type="checkbox"  id="ApplyToCHK" /><br />
+            <input type="text" id="Firstname" style="background-color:gray;color:black" data-bind="value : FirstName" placeholder="FirstName" /><br />
+            <input type="text" id="Lastname" style="background-color:gray ;color:black" data-bind="value : UserEmail"  placeholder="Enter Email" />
+          </div>
+        </td>
+        <td  style="width: 484px;">
+           
+                <div >
+
+                      FullDayLeave:    <input type="checkbox" data-bind="checked: FullDay " /><br />
+        ShortLeave:    <input type="checkbox"    data-bind="checked:shortleave" /><br />
+         Comp  :    <input type="checkbox"  id="Comp"  /><br />
+             FirstHalf :    <input type="checkbox"  id="FirstHalf"  data-bind="checked: FirstHalf" /><br />
+                    SecondHalf :    <input type="checkbox"  id="SecondHalf" data-bind="checked: SecondHalf" /><br />
+            
+                </div>
+            
+        </td>
+         
+</tr>
+    <tr>
+        <td>
+            <div>
+
+
+                <div id="divopen" style="width:300px;background-color:green;color:white" data-bind="if:FullDay" > 
+                    <div id="FullDay"> <label id="FullDaylbl" style="background-color:green;color:white;font: initial"  >For FullDay</label></div>
+              <div id="FromDateDiv"> <label id="lbl1" style="background-color:green;color:white;"  >FromDate</label></div>
+                    <div id="FromDateTxt">
+                 <input  id="datetxt" style="color:black"   data-bind="datepicker:FromDate" /><br /></div>
+               <div id="ToDateDiv">
+                <label id="lbl2" style="background-color:green; color:white;" >ToDate</label></div>
+                    <div id="TodateDivtxt">
+                <input type="datetime" id="Todatetxt" style="color:black"  data-bind="datepicker:ToDate" /><br /></div>
+                <div id="Reasonlbl">
+                <label id="lbl3" style="background-color:green;color:white ; ">Reason</label></div>
+                    <div id="textarea">
+                <textarea data-bind="value:Reason" style="color:black"  > </textarea  ></div>
+               
+            </div>
+               
+
+                 <div id="divopenFirstHalf" style="width:300px;background-color:green;color:white; margin-top: 10px;" data-bind="if :FirstHalf" >
+                     <div id="For FirstHalf"> <label id="For FirstHalflbl" style="background-color:green;color:white;font: initial"  >For FirstHalf</label></div>
+                     <div id="FromDateFirstHalf"> <label id="FirstHalflbl" style="background-color:green;color:white; " >FromDate</label></div> 
+                    <div id="FromDateFirstHalfTxt">
+                 <input type="text" id="dateFirstHalftxt1" style="color:black" data-bind="datepicker:FromDateForFirstHalf"/><br /></div>
+                   <div id="ReasonFirstHalf2">
+                <label id="FirstHalflbl2" style="background-color:green;color:white " >Reason</label></div>
+                    <div id="ReasonFirstHalftextarea">
+                <textarea data-bind="value:ReasonForFirstHalf" style="color:black"  > </textarea  ></div>
+                     </div>
+
+                     <div id="divopenSecondHalf" style="width:300px;background-color:green;color:white; margin-top: 10px;" data-bind="if :SecondHalf" >
+                     <div id="For SecondHalf"> <label id="For SecondHalflbl" style="background-color:green;color:white;font: initial"  >For SecondHalf</label></div>
+                     <div id="FromDateSecondHalf"> <label id="SecondHalflbl" style="background-color:green;color:white; " >FromDate</label></div> 
+                    <div id="FromDateSecondHalfTxt">
+                 <input type="text" id="dateSecondHalftxt1" style="color:black"  data-bind="datepicker:FromDateForSecondHalf"  /><br /></div>
+                   <div id="ReasonSecondHalf2">
+                <label id="SecondHalflbl2" style="background-color:green;color:white ;" >Reason</label></div>
+                    <div id="ReasonSecondHalftextarea">
+                <textarea data-bind="value:ReasonForSecondHalf" style="color:black"  > </textarea  ></div>
+                
+                    
+            </div>
+                 <div id="divopen1" style="width:300px;background-color:green;color:white; margin-top: 10px;" data-bind="if :shortleave" >
+                     <div id="Shortleave"> <label id="Shortleavelbl" style="background-color:green;color:white;font: initial"  >For Shortleave</label></div>
+                     <div id="FromDateDiv2"> <label id="FromDatlbl" style="background-color:green;color:white; " >FromDate</label></div> 
+                    <div id="FromDateTxt2">
+                 <input type="datetime" id="datetxt1" style="color:black"  data-bind="datepicker :FromDateForshortleave"  /><br /></div>
+                   <div id="Reasondiv2">
+                <label id="Reasonlbl2" style="background-color:green;color:white ;" >Reason</label></div>
+                    <div id="Reasontextarea">
+                <textarea data-bind="value:ReasonForshortleave" style="color:black"  > </textarea  ></div>
+                
+                    
+            </div>
+
+            </div>
+        </td>
+        <td>
+            <input type="button" id="Apply" value="Apply" style="background-color:green;color:white;width: 100px;
+height: 30px;" data-bind="click:SaveLeaveItemRecord"/>
+
+           
+        </td>
+        
+    </tr>
+    <tr>
+        <td>
+
+             Leave types;
+        <ul class="nav nav-tabs filterlist" data-bind="foreach:FetchLeaveType">
+            <li>
+            <input type="checkbox" data-bind="value :TypeName " >
+            </li> 
+         </ul>
+        </td>
+    </tr>
+</script>
+
+
+
+
+
+   

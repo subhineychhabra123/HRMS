@@ -1,0 +1,8 @@
+<p>Dear {Registration_User_Name}</p><br /><br />
+
+<p>This e-mail has been sent to you by EMPMGMT DEPLOYEMENT team to inform you that your account has been deactivated. You need to contact our sales team to help you further on this email : sales@mail.com</p><br /><br />
+
+Comment by Admin:{Comment_By_Admin}
+
+<p>Regards</p><br />
+<P>Sales and Finance Team</P>

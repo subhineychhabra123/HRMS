@@ -1,0 +1,172 @@
+﻿@using EMPMGMT.Web.Infrastructure;
+@using EMPMGMT.Utility;
+
+@model EMPMGMT.Web.ViewModels.ProfileVM
+@{
+    ViewBag.Title = "EMPMGMT Deployment  | ProfileDetail";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+    var renderType = "";
+    var moduleName = "";
+    var renderType1 = false;
+    var isRenderType1Complete = false;
+}
+@section scripts {
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.ProfileDetail.js")" type="text/javascript"></script>
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ProfileDetail.pageLoad();
+}
+<h2>Permission Details</h2>
+@if (Model.IsDefaultForRegisterdUser == true)
+{
+    <div class="msgSuccess">This profile can't be edited</div>
+}
+
+@*<input type="text" value="@Newtonsoft.Json.JsonConvert.SerializeObject(Model)" />*@
+<div id="PermissionContainer" class="clear-both tablecontainer" style="min-height: 400px">
+    <div class="heading">
+        <h2>Profile Name : @Model.ProfileName</h2>
+        <div class="buttonarea">
+
+            <a href="@Request.UrlReferrer" class="" >
+                <input type='button' class="btn btn-primary redirectBack pull-right purple  small normal" value="Back" /></a>
+            <div class="buttoncontainer">
+                @if (!(Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false))
+                {
+                    <input type="button" data-bind="click:SavePermissions" class="btn btn-primary pull-right purple _savePermissions permissionbased  floatleft" data-permission="@string.Concat(Constants.MODULE_PROFILE, Constants.PERMISSION_EDIT)" value="Save" />
+                }
+            </div>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+
+
+
+    @foreach (var x in @Model.ProfilePermissionModels)
+    {
+        //header 1      
+        renderType = x.ModulePermission.Module.RenderType;
+
+        //detail
+
+        if (renderType == Convert.ToString((int)EMPMGMT.Utility.Enums.RenderType.Table))
+        {
+            if (!renderType1)
+            {
+        @Html.Raw("<table class='table'>");
+       
+        <tr>
+            <th>Module Name
+            </th>
+            <th>View
+            </th>
+            <th>Create
+            </th>
+
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+                                          renderType1 = true;
+            }
+            if (moduleName != x.ModulePermission.Module.ModuleName)
+            {
+                if (x.ModulePermission.Module.ParentModuleId == null)
+                {
+                    continue;
+                }
+                if (moduleName != "")
+                {
+        @Html.Raw("</tr>");
+                }
+        @Html.Raw("<tr>");<td>@CommonFunctions.GetGlobalizedLabel("Profile", x.ModulePermission.Module.ModuleName)</td>
+            }      
+           
+        <td>
+            @if (x.ModulePermission.IsReadOnly == true || ((Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false)))
+            {
+                if (x.HasAccess == true)
+                {
+                @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @checked = x.HasAccess, @disabled = "disabled" });
+                }
+                else
+                { @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @disabled = "disabled" });
+                }
+
+            }
+            else
+            {
+                if (x.HasAccess == true)
+                {
+                @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @checked = x.HasAccess });
+                }
+                else
+                { @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId });
+                }
+            }
+
+        </td>        
+
+            moduleName = x.ModulePermission.Module.ModuleName;
+        }
+        //header 2
+
+        if (renderType == Convert.ToString((int)EMPMGMT.Utility.Enums.RenderType.List))
+        {
+            if (!isRenderType1Complete)
+            {   
+        @Html.Raw("</table>");
+                             isRenderType1Complete = true;
+            }
+            if (moduleName != x.ModulePermission.Module.ModuleName)
+            {
+                if (x.ModulePermission.Module.ParentModuleId == null)
+                {
+        <div>
+            <h2>
+                @* @CommonFunctions.GetGlobalizedLabel("Profile", "PageSubHeader" + x.ModulePermission.Module.ModuleCONSTANT)*@
+            </h2>
+        </div>  moduleName = x.ModulePermission.Module.ModuleName;
+                continue;
+                }
+
+            }
+              
+   
+           
+        <div class="subpermission">
+            @*  @CommonFunctions.GetGlobalizedLabel("Profile", x.ModulePermission.Permission.PermissionCONSTANT)*@
+
+            @if (x.ModulePermission.IsReadOnly == true || ((Model.IsDefaultForRegisterdUser ?? false) || (Model.IsDefaultForStaffUser ?? false)))
+            {
+                if (x.HasAccess == true)
+                {
+                @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @checked = x.HasAccess, @disabled = "disabled" });
+                }
+                else
+                { @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @disabled = "disabled" });
+                }
+
+            }
+            else
+            {
+                if (x.HasAccess == true)
+                {
+                @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId, @checked = x.HasAccess });
+                }
+                else
+                { @Html.CheckBox("chkPermission", new { pid = x.ProfileId, ppid = x.ProfilePermissionId });
+                }
+            }
+
+        </div>        
+
+            moduleName = x.ModulePermission.Module.ModuleName;
+        }
+    }
+
+
+</div>
+

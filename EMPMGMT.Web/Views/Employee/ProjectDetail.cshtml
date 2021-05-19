@@ -1,0 +1,292 @@
+﻿@model EMPMGMT.Web.ViewModels.ProjectVM
+@using EMPMGMT.Utility
+@{
+    ViewBag.Title = "Project Detail";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+<script type="text/javascript">
+    function EditProject() {
+        var ProjectId = $('#hdnProjectId').val();
+        window.location.href = "/Employee/EditProject/" + ProjectId;
+    }
+
+</script>
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.ManageActionList.js")" type="text/javascript"></script>
+        
+    <script src="@Url.Content("~/Scripts/Popup.js")"></script>
+    <script src="~/Scripts/file-upload/jquery.uploadfile.js"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/file-upload/jquery.form.js")"></script>
+    <link href="~/Scripts/file-upload/uploadfile.min.css" rel="stylesheet" />
+    <script src="~/Scripts/AutoComplete.js"></script>
+    <link href="~/Content/css/popbox.css" rel="stylesheet" />
+    
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ManageActionList.pageLoad();
+}
+
+
+<div class="panel-body">
+    <div class="modal-header">
+        <h2 class="modal-title">Project Detail</h2>
+
+        @Html.HiddenFor(model => model.ProjectId, new { id = "hdnUserId" })
+
+        <div class="row pr-md text-right">
+            <a class="btn btn-primary redirectBack permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_EDIT)" onclick="javascript:EditProject();">Edit</a>
+            <a class="btn btn-primary redirectBack" href="@Request.UrlReferrer">Back</a>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Title </label>
+            <div class="col-sm-8">
+                @Html.HiddenFor(model => model.ProjectId, new { id = "hdnProjectId" })
+                @Html.DisplayFor(model => model.ProjectName, new { @class = "form-control _clearProfile" })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inputSuccess" class="col-sm-4 control-label">Project Lead</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.FullName, new { @class = "form-control _clearProfile _ResponsibleUserAutoComplete" })
+                @Html.HiddenFor(model => model.ProjectLead, new { id = "hdnUserId" })
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Project Code</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.ProjectCode, new { @class = "form-control _clearProfile" })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Project Description</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.ProjectDescription, new { @class = "form-control _clearProfile" })
+
+            </div>
+           @* <div class="form-group">
+                <label class="col-sm-4 control-label">Communication EmailId</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.CommunicationEmailId, new { @class = "form-control _clearProfile"  })
+                   
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Communication EmailPassword</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.CommunicationEmailPassword, new { @class = "form-control _clearProfile" })
+
+            </div>*@
+        </div>
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">SourceControlDetail</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.SourceControlDetail, new { @class = "form-control _clearProfile" })
+
+            </div>
+            </div>
+               <div class="form-group">
+                <label class="col-sm-4 control-label">Project Url</label>
+                <div class="col-sm-8">
+                    @Html.DisplayFor(model => model.ProjectUrl, new { @class = "form-control _clearProfile"  })
+                 
+                </div>
+            </div>
+           
+
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Status</label>
+            <div class="col-md-6">
+                @if (Model.Status == 1)
+                {
+                    @Html.Raw("Pipeline")
+                        
+                }
+                else if (Model.Status == 2)
+                {  @Html.Raw("InProgress")  }
+                else if (Model.Status==3)
+                { @Html.Raw("Halted")
+                }
+                else
+                {
+                    @Html.Raw("Completed") 
+                }
+
+                @* @Html.RadioButtonFor(m => m.Status, "1", new { @checked = true, style="display:none" }) Done
+                                @Html.RadioButtonFor(m => m.Status, "2") InProgress
+                                @Html.RadioButtonFor(m => m.Status, "3") Pending
+                       @Html.DisplayFor(model => model.Status, new { @class = "form-control _clearProfile"  })       *@
+            </div>
+        </div>
+
+        @*<div class="form-group">
+                    <label class="col-sm-4 control-label">Responsible<span class="required">*</span></label>
+                    <div class="col-sm-8">
+                        
+                              @Html.DisplayFor(model => model.ResponsibleUserName, new { @class = "form-control _clearProfile _ResponsibleUserAutoComplete"  })
+                         <span class="error">@Html.ValidationMessageFor(model => model.ResponsibleUserName)</span>
+                                @Html.HiddenFor(model => model.ResponsibleUserId, new { id = "hdnResponsibleUserId" })
+                               
+                        </div>
+                </div>*@
+        <div class="form-group">
+            <label class="col-sm-4 control-label">Start Date</label>
+            <div class="col-sm-8">
+
+
+                @Html.DisplayFor(model => model.StartDate, "{0:dd/MM/yyyy}", new { @class = "form-control _clearProfile", id = "StartDate" })
+                @*@model DateTime
+                     @Html.DisplayFor("",(Model.star) Model.HasV model => model.StartDate, "{0:mm/dd/yyyy}", new { @class = "form-control _clearProfile", id = "StartDate" })*@
+
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-4 control-label">End Date</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.EndDate, "{0:dd/MM/yyyy}", new { @class = "form-control _clearProfile", id = "EndDate" })
+
+            </div>
+        </div>
+         <div class="form-group">
+            <label class="col-sm-4 control-label">ActualWork (in Hour(s))</label>
+            <div class="col-sm-8">
+                @Html.DisplayFor(model => model.TIMECONSUMED, new { @class = "form-control _clearProfile", id = "TotalWorkHours" })
+
+            </div>
+        </div>
+            <div class="form-group">
+            <label class="col-sm-4 control-label">Resources</label>
+            <div class="col-sm-8">  
+               <div class="responsibleUserAutoComplete1-display">
+                        @foreach (var list in Model.Resources)
+                        { if (list.RecordDeleted==false)
+                          {
+                               <div class="responsible-popup-block">
+                           <a class="floatleft" style="margin-right: 1px;" target="_blank" href="/Employee/UserDetails/@list.UserId"> @list.FullName
+                            <input type="hidden" value="@list.UserId"  id ="hndResourceUserid"/>
+                               </a>
+                               </div>
+                          
+                        }
+                        }
+            </div>
+                        
+                @*@Html.DisplayFor(model=>model.Resources[0].FUllName)
+
+                <div id ="ResponsibleUserAutoComplete1">
+                    <div class="responsibleUserAutoComplete1-display" data-bind=" visible: ResponsibleTempList().length > 0, template: { name: 'ActionItemResponsibleTemplate', foreach: ResponsibleTempList }"></div>
+                 <script type="text/html" id="ActionItemResponsibleTemplate" class="_responsible-inner">
+                      
+                    <div class="responsible-popup-block">
+                        <div class="floatleft" data-bind=" text: FullName" style="margin-right: 1px;">
+                        </div>
+                    </div>                  
+                </script>
+            </div>  
+                 @Html.HiddenFor(model => model.GblprojectLead, new { id = "GblprojectLead" })
+              <input type="hidden" id="values" value="@ViewBag.json" />      *@    
+        </div>
+
+
+
+    </div>
+    @*   AddActionItem*@
+    <div class="clear"></div>
+    <div class="row" id="ManageActionItem">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel">
+                    <div class="panel-body">
+                    <div class="col-md-6 col-xs-8 ">
+                        <div class="input-group input-search form-group">
+                            <input type="text" placeholder="Search..." id="txtsearch" data-bind="value: SearchText" name="q" class="form-control _SearchTxt">
+                            <span class="input-group-btn">
+                                <button type="submit" class="btn btn-default" data-bind="    click: FilteredData"><i class="fa fa-search"></i></button>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-6 col-xs-4">
+                        <a  class="btn btn-primary pull-right permissionbased"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_LIST, Constants.PERMISSION_CREATE)" href=" /Project/ActionList/@Model.ProjectId">Create</a>
+                    </div>
+                </div>
+            </div>
+</div>
+        </div>
+
+
+        <div class="col-md-12">
+
+
+            <div class="clear"></div>
+            <section class="panel">
+                <div class="panel-body">
+                    <div class="table-responsive dataTables_wrapper">
+
+                        <table class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                            <thead>
+                                <tr class="primary">
+                                    <!-- ko foreach:TableHeaders   -->
+                                    <th class="sorting" scope="col" data-bind="html: ColumnText, click: Sort, css: SortOrder"></th>
+                                    <!-- /ko -->
+                                    <th scope="col" class="actionLink">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody data-bind="template: { name: 'ActionListTemplate', foreach: ActionList }">
+                            </tbody>
+
+                            <tr>
+                            <tr data-bind="visible: ActionList().length == 0" style="display: none;">
+                                <td colspan="4"><b>No Record Found</b></td>
+                            </tr>
+                            <script type="text/html" id="ActionListTemplate">
+                                <tr>
+                                    <td>
+                                        <a data-bind="  attr: { href: AddActionItem }, text:Title"></a>
+                                    </td>
+
+
+                                    <td>
+                                        <a data-bind="text: ResponsibleUserName, attr: { href: UserDetailHref }"></a>
+                                    </td>
+                                    @Html.HiddenFor(model => model.ProjectId, new { id = "hdnProjectId" })
+                                     <td>
+                                    <a data-bind="text: TotalWorkTime"></a>
+                                </td>
+
+                                    <td>
+                                        <img data-bind="attr: { src: StatusImage } " />
+                                    </td>
+
+                                    <td class="actions actionLinks">
+                                        <a class="permissionbased" data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_LIST, Constants.PERMISSION_EDIT)" title="Edit" data-bind=" attr: { href: GoToEditActionList }"><i class="fa fa-pencil"></i></a>
+                                        <a class="permissionbased" data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_LIST, Constants.PERMISSION_DELETE)" title="Delete" data-bind="  click: DeleteActionListAction"><i class="fa fa-trash-o"></i></a>
+                                    </td>
+                                </tr>
+                            </script>
+                        </table>
+                    </div>
+                </div>
+                <div class="pull-left _ActionListPager"></div>
+            </section>
+
+        </div>
+
+
+    </div>
+</div>

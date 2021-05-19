@@ -1,0 +1,294 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{2BEAC658-EE8B-49C4-914B-3B1B82706627}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EMPMGMT.Repository</RootNamespace>
+    <AssemblyName>EMPMGMT.Repository</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ActionItem.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionItemComment.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionItemCommentRepository.cs" />
+    <Compile Include="ActionItemRepository.cs" />
+    <Compile Include="ActionItemResponsible.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionItemResponsibleRepository.cs" />
+    <Compile Include="ActionList.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ActionListRepository.cs" />
+    <Compile Include="Attachment.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Candidate.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="ClientDetail.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Comments.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CommentsRepository.cs" />
+    <Compile Include="Company.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Country.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Designation.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DesignationRepository.cs" />
+    <Compile Include="ELMAH_Error.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmployeeSkill.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileAttachments.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FileAttachmentsRepository.cs" />
+    <Compile Include="GetActionItemsCalculatedData_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeavesApprovedByRepository.cs" />
+    <Compile Include="LeaveTypeRepository.cs" />
+    <Compile Include="Group.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\BaseRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IBaseRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IDbRepository.cs" />
+    <Compile Include="Infrastructure\Contract\IUnitOfWork.cs" />
+    <Compile Include="Infrastructure\UnitOfWork.cs" />
+    <Compile Include="InterviewDetail.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InterviewDetailSkill.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Leaves.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeavesApprovedBy.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LeavesItemRepository.cs" />
+    <Compile Include="LeaveType.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Module.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModulePermission.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrganizationUnit.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Permission.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Profile.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilePermission.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfilePermissionRepository.cs" />
+    <Compile Include="ProfileRepository.cs" />
+    <Compile Include="Project.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectClientDetail.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectGroup.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProjectgroupRepository.cs" />
+    <Compile Include="ProjectRepository.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Referrer.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefferrerRepository.cs" />
+    <Compile Include="Resources.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ResourcesRepository.cs" />
+    <Compile Include="RoleRepository.cs" />
+    <Compile Include="Skill.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ssp_GetActionItemDateTimeSheet_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionItemDescription_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionItemsforDropdwonforProjectId_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionItemsFromActionId_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionItemsFromActionListId_Mtest_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionItemsFromActionListId_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetActionListDetails_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetEmployeeWorkHours_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ssp_GetMonthTimeSheet_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetMonthYearTimeSheet_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetOrganizationAutocomplete_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetProjectListDetails_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetProjectWorkHours_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SSP_GetRefferrerForAutoComplete_Result.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="State.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Status.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="STRATEGYEntities.Context.cs" />
+    <Compile Include="STRATEGYEntities.cs" />
+    <Compile Include="STRATEGYEntities.Designer.cs">
+      <DependentUpon>STRATEGYEntities.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="STRATEGYEntities1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Technology.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TechnologyRepository.cs" />
+    <Compile Include="TimeSheet.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TimeSheetRepository.cs" />
+    <Compile Include="UserGroup.cs">
+      <DependentUpon>STRATEGYEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserGroupRepository.cs" />
+    <Compile Include="UserRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="STRATEGYEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>STRATEGYEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="STRATEGYEntities.edmx.diagram">
+      <DependentUpon>STRATEGYEntities.edmx</DependentUpon>
+    </None>
+    <None Include="STRATEGYEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>STRATEGYEntities1.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

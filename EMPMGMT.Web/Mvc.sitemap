@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvcSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xmlns="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0"
+            xsi:schemaLocation="http://mvcsitemap.codeplex.com/schemas/MvcSiteMap-File-4.0 MvcSiteMapSchema.xsd">
+
+  <mvcSiteMapNode title="Home" controller="Employee" action="Home">
+
+    <mvcSiteMapNode title="Employee" controller="Employee" action="ManageUser">
+      <mvcSiteMapNode title="Add User" controller="Employee" action="AddUserView"/>
+      <mvcSiteMapNode title="Edit User" controller="Employee" action="EditUserView"   preservedRouteParameters="Id_encrypted"/>
+      <mvcSiteMapNode title="User Detail" controller="Employee" action="UserDetails" preservedRouteParameters="Id_encrypted"/>
+      <mvcSiteMapNode title="Upload Users" controller="Employee" action="uploaduser"/>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Goals" controller="Employee" action="Goals">
+      <mvcSiteMapNode title="EMPMGMT Deployment X-Matrix" controller="Employee" action="XMatrix" preservedRouteParameters="Id_encrypted"/>
+      <mvcSiteMapNode title="Edit Goal" controller="Employee" action="ManageGoal" preservedRouteParameters="Id_encrypted"/>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Metric Dashboard" controller="Employee" action="ManageMetricDashboard">
+      <mvcSiteMapNode title="Add Metric Dashboard " controller="Employee" action="MetricDashboard" />
+      <mvcSiteMapNode title="Edit Metric Dashboard" controller="Employee" action="MetricDashboard" preservedRouteParameters="Id_encrypted"/>
+     <mvcSiteMapNode title="Dashboard Data" controller="Employee" action="Dashboard" preservedRouteParameters="Id_encrypted"/>
+      <!--<mvcSiteMapNode title="Root Cause Action" controller="Employee" action="RootCauseAction" preservedRouteParameters="Id_encrypted, type" />-->
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Categories" controller="Employee" action="ManageCategory">
+    
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Profile" controller="Employee" action="ViewUserProfile"> 
+      <mvcSiteMapNode title="Edit Profile " controller="Employee" action="UserProfile" />
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Organization Units" controller="Employee" action="OrganizationUnits">
+     
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Action List" controller="Employee" action="ManageActionList">
+      <mvcSiteMapNode title="Add Action List " controller="Employee" action="ActionList" />
+      <mvcSiteMapNode title="Edit Action List" controller="Employee" action="ActionList" preservedRouteParameters="Id_encrypted"/>
+      <mvcSiteMapNode title="Action Item List " controller="Employee" action="ManageActionItem" preservedRouteParameters="Id_encrypted" >
+        <mvcSiteMapNode title="Action Item " controller="Employee" action="ActionItemDescription" preservedRouteParameters="Id_encrypted" >
+        </mvcSiteMapNode>
+      </mvcSiteMapNode>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Action Listing" controller="Employee" action="ActionListing">
+     
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Profiles" controller="Employee" action="profiles">
+      <mvcSiteMapNode title="Profile Detail" controller="Employee" action="ProfileDetail" preservedRouteParameters="Id_encrypted" />
+    </mvcSiteMapNode>
+
+
+  <mvcSiteMapNode title="Metrics" controller="Employee" action="Metric">
+    <mvcSiteMapNode title="Manage Metric" controller="Employee" action="ManageMetric" preservedRouteParameters="Id_encrypted"/>
+
+    <mvcSiteMapNode title="Metric Detail" controller="Employee" action="MetricDetails"  preservedRouteParameters="Id_encrypted"/>
+  </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Root Cause Action List" controller="Employee" action="RootCauseActionList">
+      
+
+      <mvcSiteMapNode title="Root Cause Action Details" controller="Employee" action="RootCauseActionDetails"  preservedRouteParameters="Id_encrypted"/>
+
+      <mvcSiteMapNode title="Root Cause Action" controller="Employee" action="RootCauseAction"   preservedRouteParameters="Id_encrypted"/>
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Key Performance Indicators" controller="Employee" action="KeyPerformanceIndicatorList">
+
+
+      <mvcSiteMapNode title="Key Performance Indicator Detail" controller="Employee" action="KeyPerformanceIndicatorDetails"  preservedRouteParameters="Id_encrypted"/>
+
+      <mvcSiteMapNode title="Key Performance Indicator" controller="Employee" action="ManageKPI"  preservedRouteParameters="Id_encrypted"/>
+
+      <mvcSiteMapNode title="Dashboard" controller="Employee" action="KPIDashboard"  preservedRouteParameters="Id_encrypted"/>
+    </mvcSiteMapNode>
+    
+    <mvcSiteMapNode title="Key Performance Indicator View" controller="Employee" action="KPIHierarchy">
+    </mvcSiteMapNode>
+
+    <mvcSiteMapNode title="Key Performance Indicator Levels" controller="Employee" action="KeyPerformanceIndicatorLevelList">
+    </mvcSiteMapNode>
+
+  </mvcSiteMapNode>
+</mvcSiteMap>
+
+

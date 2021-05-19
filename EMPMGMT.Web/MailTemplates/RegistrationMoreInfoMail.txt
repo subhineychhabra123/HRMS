@@ -1,0 +1,12 @@
+<p>Dear {Registration_User_Name}</p><br /><br />
+
+<p>You have already sent a request to access our EMPMGMT and KPI deployment tools on trial basis. But in order to understand you fully, we need more information from your side. Please send your organization details, number of employees, revenue model of your company, EMPMGMT deployment purpose for your organization and  your existing business details. Our team will get in touch with you to help you further.  
+</p><br /><br />
+
+<p> Thanks for your registration process and your information may help us to understand you and your requirement.</p>
+<br /><br />
+Comment by Admin:{Comment_By_Admin}
+
+<p>Regards</p><br />
+
+<P>Administration</P>

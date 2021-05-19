@@ -1,0 +1,8 @@
+<p>Dear {Registration_User_Name} </p><br /><br />
+
+<p>Your request is successfully submitted for the trial access of EMPMGMT and KPI deployment tools which will be processed very soon. One of our team member with get in touch with you to gather your exact requirement to help you demonstrating our wonderful product so that your organization can use it in a better way. </p><br /><br />
+
+You may contact our sales and support team here for quick help : 99.99.9999
+
+<p>Regards</p><br />
+<P>Sales Team </P>

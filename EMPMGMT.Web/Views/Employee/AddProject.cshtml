@@ -1,0 +1,153 @@
+﻿@model EMPMGMT.Web.ViewModels.ProjectVM
+@using EMPMGMT.Utility
+@{
+    ViewBag.Title = "AddProject";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+     
+        $('._SavePrpject').on("click", function () {
+
+            return false;
+        });
+
+        onSuccess = function (data) {
+            alert('success')
+        }
+    });
+
+</script>
+@*<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+   <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>*@
+
+<h2>AddProject</h2>
+@using (Ajax.BeginForm("AddProject", "User", new AjaxOptions { OnSuccess = "onSuccess"}))
+{
+    @Html.ValidationSummary(true) 
+
+    <fieldset>
+        <legend>ProjectVM</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectId)
+            @Html.ValidationMessageFor(model => model.ProjectId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectName)
+            @Html.ValidationMessageFor(model => model.ProjectName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectCode)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectCode)
+            @Html.ValidationMessageFor(model => model.ProjectCode)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ProjectDescription)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ProjectDescription)
+            @Html.ValidationMessageFor(model => model.ProjectDescription)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.StartDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.StartDate)
+            @Html.ValidationMessageFor(model => model.StartDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.EndDate)
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CommunicationEmailId)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CommunicationEmailId)
+            @Html.ValidationMessageFor(model => model.CommunicationEmailId)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CommunicationEmailPassword)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CommunicationEmailPassword)
+            @Html.ValidationMessageFor(model => model.CommunicationEmailPassword)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.SourceControlDetail)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.SourceControlDetail)
+            @Html.ValidationMessageFor(model => model.SourceControlDetail)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Status)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedDate)
+            @Html.ValidationMessageFor(model => model.CreatedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CreatedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CreatedBy)
+            @Html.ValidationMessageFor(model => model.CreatedBy)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedDate)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedDate)
+            @Html.ValidationMessageFor(model => model.ModifiedDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ModifiedBy)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.ModifiedBy)
+            @Html.ValidationMessageFor(model => model.ModifiedBy)
+        </div>
+
+        <p>
+            <input type="submit" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_CREATE)" value="Create"  class="_SavePrpject permissionbased"/>
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

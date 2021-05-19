@@ -1,0 +1,67 @@
+﻿@model EMPMGMT.Web.ViewModels.LoginVM
+@{
+    ViewBag.Title = "Super Admin Login";
+   
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>EMPMGMT Deployment | Admin-Login</title>
+    
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Content/css/OuterCss.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.js")"></script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="back">
+            <div class="cantrol-hold">
+                <div class="control-group">
+                    <div class="login-logo">
+                        <a href="/Home">
+                            <img src="/content/images/logo.png" alt="" title=""></a>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">User Name<span class="required">*</span></span>
+
+                        <span class="input">
+                            <div class="error-msg-height">
+                                <span class="field-validation-error" data-valmsg-replace="true" data-valmsg-for="EmailId">
+                                    <span class="" for="EmailId">@ViewBag.LoginError</span>
+                                </span>
+                            </div>
+                            @Html.TextBoxFor(m => m.EmailId)</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="cantrol-value1">
+                        <span class="lable1">Password<span class="required">*</span></span>
+                        <span class="input1">
+                            <div class="error-msg-height">@Html.ValidationMessageFor(m => m.Password)</div>
+                            @Html.TextBoxFor(m => m.Password, new { type = "password" })</span>
+                        <div class="clear"></div>
+                    </div>
+
+                     <div class="cantrol-value1">
+                        <span class="lable1"></span>
+                        <span class="input_button" >
+                          
+                             <input type="submit" class="button" value="Login"><a href="/ForgotPassword" class="forgot-password"><span>Forgot password ?</span></a>
+                            </span>
+                        <div class="clear"></div>
+                    </div>
+                    
+                    <div class="clear"></div>
+                    <div class="shadow">
+                        <img src="/content/images/shadow.png" alt="" title="">
+                    </div>
+                    <div class="copy-right1">copyright</div>
+                </div>
+            </div>
+        </div>
+    }
+</body>
+</html>

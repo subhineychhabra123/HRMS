@@ -1,0 +1,122 @@
+﻿@model EMPMGMT.Web.ViewModels.ProjectVM
+@using EMPMGMT.Utility;
+@{
+    ViewBag.Title = "Project List";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+
+<title>Projects </title>
+
+@section scripts {
+    <script type="text/javascript" src="@Url.Content("~/Scripts/knockout.mapping.js")"></script>
+    <script  type="text/javascript" src="@Url.Content("~/Scripts/knockout.validation.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/EMPMGMT.User/EMPMGMT.User.ProjectList.js")" type="text/javascript"></script>
+
+}
+
+@section ReadyScripts
+{
+EMPMGMT.User.ProjectList.pageLoad();
+}
+@Html.HiddenFor(model => model.ProjectId, new { id = "hdnProjectId" })
+
+
+<div class="row">
+
+    <div class="col-md-12 ">
+       @ViewBag.Message
+          
+    </div>
+
+
+</div>
+
+
+<div class="row">
+
+    <div class="col-md-6 col-xs-8 ">
+        <div class="input-group input-search">
+            <input type="text" placeholder="Search..." id="txtsearch" data-bind="value: SearchText" name="q" class="form-control _SearchTxt">
+            <span class="input-group-btn">
+                <button type="submit" class="btn btn-default" data-bind="click: FilteredData"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+
+    </div>
+    <div class="col-md-6 col-xs-4">
+        <a class="btn btn-primary pull-right permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_CREATE)" href="/Employee/AddProject">Create</a>
+    </div>
+
+
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="table-responsive dataTables_wrapper">
+
+                    <table summary="Manage Metric Dashboard" class="table table-bordered mb-none _tablelist" id="hor-zebra">
+
+                        <thead>
+                            <tr class="primary">
+                                <!-- ko foreach:TableHeaders   -->
+                                <th class="sorting" scope="col" data-bind="html: ColumnText, click: Sort, css: SortOrder"></th>
+                                <!-- /ko -->
+                                <th scope="col" class="actionLink">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="template: { name: 'MetricDashboardTemplate', foreach: ProjectListBind }">
+                        </tbody>
+
+                        <tr data-bind="visible: ProjectListBind().length == 0 && !IsInitialLoading()" style="display: none;">
+                            <td colspan="4"><b>No Record Found</b></td>
+                        </tr>
+                        <script type="text/html" id="MetricDashboardTemplate">
+                            <tr>
+                                <td>
+                                <a data-bind="  attr: { href: ProjectDetail }, text: ProjectName" ></a> @*target="_blank"*@
+                                </td>
+                                 <td>
+                                    <div data-bind="text: ProjectCode"></div>
+                                </td>
+                               
+                                <td>
+                                    <div data-bind="text: StartDate"></div>
+                                </td>
+                                <td>
+                                    <div data-bind="text: EndDate"></div>
+                                    
+                                </td>
+                                 <td>
+                                    <div data-bind="text: TIMECONSUMED"></div>
+                                    
+                                </td>
+                               
+                                <td>
+                                  <a data-bind="text: FullName, attr: { href: ProjectLeadUrl }" ></a> @*target="_blank"*@
+                                </td>
+
+                                <td class="actionLinks">@*class="actions"*@
+                                    <a href="javascript:void(0)" class="mr-xs permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_EDIT)" title="Edit" data-bind="  attr: { href: EditProject }"><i class="fa fa-pencil"></i></a>
+                                    <a href="javascript:void(0)" class="permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_DELETE)" data-bind=" click: $root.DeleteProjectAction" title="Delete File"><i class="fa fa-trash-o"></i> </a>
+
+                                      @*   <a href="javascript:void(0)" class="mr-xs permissionbased" data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_VIEW)" title="Action List" data-bind="  attr: { href: ManageActionList }"><img src="/Content/images/actionlist.png" /></a>*@
+                                    
+                                </td>
+                              
+                            </tr>
+                        </script>
+                    </table>
+                </div>
+            </div>
+            <div class="_MetricDashboardPager "></div>
+        </section>
+    </div>
+</div>
+
+
+
+
+
+

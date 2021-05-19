@@ -1,0 +1,91 @@
+﻿@using EMPMGMT.Web.Infrastructure;
+@using EMPMGMT.Utility;
+
+@model EMPMGMT.Web.ViewModels.ProfileVM
+
+@{
+    ViewBag.Title = "EMPMGMT Deployment | Create Profile Type";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
+}
+
+@*@section scripts {
+
+     @Scripts.Render("~/bundles/ValidateScripts")
+    }*@
+
+
+
+
+
+
+
+
+   
+
+
+
+@using (Html.BeginForm("CreateProfileType", "User", FormMethod.Post, new { @id = "CreateProfileType" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+   
+ <div class="heading">
+      <h2>Create New Profile</h2>
+      <div class="buttonarea">
+       
+        <a class="button _back" >
+                        Back</a>
+      </div>
+      <div class="clear"></div>
+    </div>
+        <div class="wrapper">
+            @Html.HiddenFor(model => model.CompanyId)
+
+        <div class="control-container">
+        	<div class="left-container">
+        		Profile Name<span class="required">*</span>
+        	</div>
+            <div class="right-container">
+            <div class="error-container">@Html.ValidationMessageFor(model => model.ProfileName, String.Empty, new { @class="required"})</div>
+
+                  @Html.TextBoxFor(model => model.ProfileName, new { @class = "input-type-text", maxlength = 250 })
+
+                
+                     
+        		
+        	</div>
+            <div class="clear"></div>
+        </div>
+
+
+            <div class="control-container">
+        	<div class="left-container">
+        		Description<span class="required">*</span>
+        	</div>
+            <div class="right-container fix-textarea">
+            <div class="error-container"> @Html.ValidationMessageFor(model => model.Description, String.Empty, new { @class="required"})</div>
+              @Html.TextAreaFor(model => model.Description, new { @class = "input-type-textarea", maxlength = 800 })
+                     
+        		
+        	</div>
+            <div class="clear"></div>
+        </div>
+
+            
+            <br />
+
+            <div class="dvpadding">
+
+            
+             
+                    <input type="submit" data-permission="@string.Concat(Constants.MODULE_PROFILE, Constants.PERMISSION_CREATE)" value="Save" class="button small purple _savePermissions permissionbased">
+                   
+
+                
+            </div>
+        </div>
+   
+    
+}
+

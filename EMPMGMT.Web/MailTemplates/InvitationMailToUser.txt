@@ -1,0 +1,11 @@
+﻿<p>Dear {Registration_User_Name},</p>
+<p>This is to notify that you have been registered successfully on EMPMGMT DEPLOYMENT.</p>
+
+<p>UserName:&nbsp; {Account_Login_UserId} <br /><br />
+Please click the link below to set your password, so as to start using our services.<br/>
+<a href="{Account_Login_URL}"> {Account_Login_URL} </a></p>
+
+<p></p>
+
+<p>Regards,<br/>
+Technical Team</p>

@@ -1,0 +1,420 @@
+﻿@using EMPMGMT.Utility;
+<link href="~/Content/css/InnerCss.css" rel="stylesheet" />
+<link href="~/Content/css/circle.css" rel="stylesheet" />
+<script src="~/Scripts/progress-circle.js"></script>
+<div class="clearfix">
+    <div id="ManageActionItemContainer">
+
+        <div class="row mt-xlg">
+            <div class="col-md-2">
+                <div class="form-group">
+                    <input type="text" id="txtsearch" data-bind="value: SearchText" class="form-control _SearchTxt " placeholder="ActionItem Name" />
+                </div>
+
+            </div>
+              <div class="col-md-2">
+                    <div class="form-group">
+                         <select id="ddlResponsible" class="form-control _ddlResponsible">
+                                                               
+                            </select>
+                </div>
+
+            </div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <input id="startDatesearch"  placeholder="Start Date"  maxlength="20" class="form-control pointer">
+                </div>
+            </div>
+            
+               <div class="col-md-2">
+                <div class="form-group">
+                    <input id="dueDatesearch" class="form-control pointer"  maxlength="20"  placeholder="End Date" />
+              </div></div>
+              <div class="col-md-2">
+                <div class="form-group">
+                    <select id="ddlStatusSearch" class="form-control">
+                                <option value="0" selected="selected" >Select Status</option>
+                                <option value="1">To Do</option>
+                                  <option value="2">In Progess</option>
+                                  <option value="3">On Hold</option>
+                                <option value="4">For Review</option>
+                                <option value="5">Completed</option>
+                            </select>
+                </div>
+            </div>
+              <div class="col-md-1">
+             <a class="btn btn-primary mb-sm mr-md pull-right" style="margin-top:.5%;" data-bind="click: FilteredData">Filter</a> </div>
+             </div>
+            <div class="col-md-10">
+                <input class="checkbox-inline mb-sm mr-xs" id="chkOnTime" type="checkbox">
+                <label class="mr-md">On Time</label>
+
+                <input class="checkbox-inline mb-sm" id="chkOverDue" type="checkbox">
+                <label class="mr-md">Over Due</label>
+
+                <input class="checkbox-inline mb-sm" data-bind="checked: ArchivedData, click: clickArchivedData" type="checkbox">
+                <label class="">Archived Items</label>
+                   
+                   
+            </div>
+        <div class ="col-md-2">
+              
+
+                <a  class="btn btn-primary pull-right"  data-toggle="modal" data-target="#ManageGoal"  data-bind="  click: CreateParentActionItem"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_CREATE)">Create</a>
+        </div>
+       
+
+
+
+
+
+        <div class="clearfix">
+            <div class="row mt-xlg">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="table-responsive dataTables_wrapper">
+                                <table summary="Manage Action Items" class="table table-bordered mb-none _tablelist" id="hor-zebra">
+                                    <thead>
+                                        <tr class="primary">
+                                            <!-- ko foreach:TableHeaders   -->
+                                            <th class="sorting" scope="col" data-bind="html: ColumnText, click: Sort, css: SortOrder"></th>
+                                            <!-- /ko -->
+                                            <th scope="col" class="actionLink">Action</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody data-bind="template: { name: 'ActionItemChildTemplate', foreach: ActionItemList }">
+                                    </tbody>
+                                    <tr data-bind="visible: ActionItemList().length == 0 && !IsInitialLoading()" style="display: none;">
+                                        <td colspan="7"><b>No Record Found</b></td>
+                                    </tr>
+                                    <script type="text/html" id="ActionItemChildTemplate">
+                                        <tr data-bind=" css: IsArchived() == true ? 'actiontitle displaynone' : ''"> @*visible: IsExpandable,*@
+                                            <td>
+
+                                                <div data-bind="style: { paddingLeft: Textpadding() + 'PX'} ">
+                                                    <a data-bind=" visible: ExpandableImageVisiblity && IsChildrenArchived" style="cursor: pointer">
+                                                        <i data-bind="attr: { 'class': CollapseExpandImage }, click: ActionItemCollapseExpandClick " class=""></i></a>
+                                                    @*data-permissionbasedtext="" permissionbased*@
+                                                    <a data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_VIEW)" data-bind="attr: { href: ActionItemRedirection }, css: { parentNode: Children() > 0 },css: ApplyCssColortext, text: ItemName"></a>
+                                                </div>
+
+                                            </td>
+                                            <td>
+                                                <div data-bind="visible: ResponsibleUserId() != 0"><a data-bind=" text: ResponsibleUserName, attr: { href: UserDetailHref },css: { parentNode: Children() > 0 },css: ApplyCssColortext"></a></div>
+                                            </td>
+
+                                            <td>
+                                                <div data-bind="text: StartDate ,css: { parentNode: Children() > 0 },css: ApplyCssColortext"></div>
+                                            </td>
+                                            <td>
+                                                <div data-bind="text: DueDate  ,css: { parentNode: Children() > 0 },css: ApplyCssColortext"></div>
+                                                <div data-bind="text: ETA ,css: { parentNode: Children() > 0 },css: ApplyCssColortext"></div>
+                                            </td>
+                                            <td>
+                                                <div data-bind="text: MaxMinutes ,css: { parentNode: Children() > 0 },css: ApplyCssColortext "></div>
+                                            </td>
+                                             <td>
+                                                <div data-bind="text: ActualTime, css: { parentNode: Children() > 0 }, css: ApplyCssColortext "></div>
+                                            </td>
+                                            <td>
+                                                <div data-bind="attr: { id: StatusElementId } ,css: { parentNode: Children() > 0 },css: ApplyCssColortext "></div>
+                                            </td>
+                                            <td>
+                                                <div data-bind=" style: { width: ProgressWidth() + 'PX', marginLeft: ProgressLeftMargin() + 'PX', marginRight: ProgressRightMargin() + 'PX' }, html: ProgressDateHtml , css: ApplyProgressSatusCss">&nbsp</div>
+                                                <div class="actionItemChildCurrentDate" data-bind=" visible: EnableProgressCurrentDate, css: { actionItemParentCurrentDate: Children().length > 0 }, html: ProgressDateHtml, style: { marginLeft: ProgressCurrentDateLeftMargin() + 'PX' }">&nbsp;</div>
+                                            </td>
+                                            <td class="actionLinks">
+                                                <a class="mr-xs permissionbased" data-toggle="modal" data-target="#ManageGoal"  style="cursor:pointer" data-bind="  click: CreatehierachyActionItem" title="Add new action item" data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_CREATE)" ><i class="fa fa-plus"></i></a>
+                                                <a class="mr-xs permissionbased" data-toggle="modal" data-target="#ManageGoal"  style="cursor:pointer" title="Edit" data-bind="  click: EditActionItem"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_EDIT)" ><i class="fa fa-pencil"></i></a>
+                                                <a class="mr-xs permissionbased" style="cursor:pointer" title="Delete" data-bind="  click: DeleteActionItem"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_DELETE)" ><i class="fa fa-trash-o"></i></a>
+                                            </td>
+                                        </tr>
+                                        <!-- ko template: { name: 'ActionItemChildTemplate', foreach:Children  }  -->
+                                        <!-- /ko -->
+                                    </script>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="_ActionItemPager"></div>
+                    </section>
+
+                </div>
+
+
+            </div>
+        </div>
+
+    </div>
+
+    
+
+
+    <script type="text/html" id="ActionItemChildTemplate_Prev">
+        <tr data-bind="visible: IsExpandable">
+
+            <td>
+
+                <div class="action-name-container">
+                    <div data-bind="style: { paddingLeft: Textpadding() + 'PX'} ">
+                        <a data-bind="   visible: ExpandableImageVisiblity">
+                            <img data-bind="attr: { src: CollapseExpandImage }, click: ActionItemCollapseExpandClick " /></a>
+                        <a data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_VIEW)" data-bind="attr: { href: ActionItemRedirection }, css: { parentNode: Childern() > 0}, text: ItemName"></a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <div data-bind="html: ResponsibleUserName"></div>
+            </td>
+            <td>
+                <div data-bind="text: StartDate"></div>
+            </td>
+            <td>
+                <div data-bind="text: DueDate"></div>
+                <div data-bind="html: ETA.length == 0 ? ' ' : ETA"></div>
+
+            </td>
+            <td>
+                <div data-bind="attr: { id: StatusElementId }"></div>
+            </td>
+
+            <td>
+                <div data-bind=" style: { width: ProgressWidth() + 'PX', marginLeft: ProgressLeftMargin() + 'PX', marginRight: ProgressRightMargin() + 'PX' }, css: ApplyProgressSatusCss, html: ProgressDateHtml"></div>
+                <div class="actionItemChildCurrentDate" data-bind=" visible: EnableProgressCurrentDate, css: { actionItemParentCurrentDate: Childern() > 0 }, html: ProgressDateHtml, style: { marginLeft: ProgressCurrentDateLeftMargin() + 'PX' }"></div>
+
+            </td>
+            <td>
+
+                <a class="permissionbased" data-bind="  click: CreatehierachyActionItem" title="Add"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_CREATE)" ></a>
+                <a class="permissionbased" title="Edit" data-bind="  click: EditActionItem"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_EDIT)" ></a>
+                <a class="permissionbased" title="Delete" data-bind="  click: DeleteActionItem"  data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_DELETE)" ></a>
+
+            </td>
+
+        </tr>
+
+        <!-- ko template: { name: 'ActionItemChildTemplate', foreach:Children  }  -->
+        <!-- /ko -->
+
+    </script>
+
+
+        <div class="modal fade" id="ManageGoal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h2 class="modal-title">Action Item</h2>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Action Name  <span class="required">*</span></label>
+                        <div class="col-sm-9">
+                            <input type="text" data-bind="value: ActionItem.ItemName" maxlength="250" class="form-control">
+                            <label class="error" id="action-name-exist" data-bind="validationMessage: ActionItem.ItemName"></label>
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Start Date </label> @*<span class="required">*</span>*@
+                        <div class="col-sm-9">
+
+                            <input id="startDate" data-bind="enable: ActionItem.EnableParentNode, value: ActionItem.StartDate" readonly="readonly" placeholder="" maxlength="100" class="form-control pointer">
+                         @*   <label class="error" data-bind="validationMessage: ActionItem.StartDate"></label>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Priority</label>
+                        <div class="col-sm-9">
+                            <select id="ddlPriority" class="form-control pointer _priorityDDL">
+                                <option value="0">
+                                Select Priority</>                                  
+                                <option value="1">High</option>
+                                <option value="2" selected="selected">Medium</option>
+                                <option value="3">Urgent</option>
+                                <option value="4">Low</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="inputSuccess" class="col-md-3 control-label">Hour's</label>
+                        <div class="col-md-9 ">
+                            <select id="ddlHours" class="form-control _HourDDL">
+                                <option selected="selected" value="0">Select Hour's</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    @*<div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">ETA </label>
+                        <div class="col-sm-9">
+
+                            <input id="EtaDate" class="form-control pointer" readonly="readonly" maxlength="100" data-bind="enable: ActionItem.EnableParentNode, value: ActionItem.ETA" placeholder="" />
+                            <label class="error" data-bind="validationMessage: ActionItem.ETA"></label>
+                        </div>
+                    </div>*@
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">End Date</label>@* <span class="required">*</span>*@
+                        <div class="col-sm-9">
+
+                            <input id="dueDate" class="form-control pointer" readonly="readonly" maxlength="100" data-bind="enable: ActionItem.EnableParentNode, value: ActionItem.DueDate" placeholder="" />
+                           @* <label class="error" data-bind="validationMessage: ActionItem.DueDate"></label>*@
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Notify By Email</label>
+                        <div class="col-sm-9">
+
+                            <input type="checkbox" class="checkbox" data-bind="checked: ActionItem.IsSendEmailNotification" name="chkIsSendEmailNotification" />
+
+                        </div>
+                    </div>
+
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Status</label>
+                        <div class="col-sm-9">
+                            <select id="ddlStatus" class="form-control _ddlStatus">
+                                <option value="0" >Select Status</option>
+                                <option value="1">To Do</option>
+                                  <option value="2">In Progess</option>
+                                  <option value="3">On Hold</option>
+                                <option value="4">For Review</option>
+                                <option value="5">Completed</option>
+                            </select>
+                        </div> </div> 
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">                  
+                         <label class="col-sm-3 control-label"></label>
+                        <div class="col-sm-9">
+                            <div data-bind="enable: ActionItem.EnableParentNode" id="slider2" class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all ui-slider-handle ui-state-default mt-xs" style="width: 200px">
+                                <a data-bind="  enable: ActionItem.EnableParentNode"></a>
+                            </div>
+                            <div>
+                                <input data-bind="enable: ActionItem.EnableParentNode" class='Labelper' type="text" id="ActioItemStatus">
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Description</label>
+                        <div class="col-sm-9">                            
+                      
+                              <textarea id="editor1" class="ckeditor" data-bind="html: ActionItem.Description" style="height: 150px;"></textarea>
+                         @*   <textarea class="form-control"  data-bind="value: ActionItem.Description" placeholder="" style="height: 150px; resize: none;"></textarea>*@
+                            <label class="error" data-bind="validationMessage: ActionItem.Description"></label>
+
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Responsible<span class="required">*</span></label>
+                        <div class="col-sm-9" id="ResponsibleUserAutoComplete1">
+                            <div class="responsibleUserAutoComplete1-display watermark-block" data-bind=" visible: ResponsibleTempList().length == 0">Responsible</div>
+                            <div class="responsibleUserAutoComplete1-display" data-bind=" visible: ResponsibleTempList().length > 0, template: { name: 'ActionItemResponsibleTemplate', foreach: ResponsibleTempList }"></div>
+                            <label class="error" data-bind="validationMessage: ResponsibleTempListError"></label>
+
+                        </div>
+                    </div>
+                    <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Archived</label>
+                        <div class="col-sm-9">
+                            <input class="checkbox" type="checkbox" data-bind="checked: ActionItem.IsArchived">
+                            <label class="error" data-bind="validationMessage: ActionItem.IsArchived"></label>
+                        </div>
+                    </div>
+
+                    @*      <div class="form-group" data-bind="validationOptions: { insertMessages: false }">
+                        <label class="col-sm-3 control-label">Responsible<span class="required">*</span></label>
+                        <div class="col-sm-9" id="ResponsibleUserAutoComplete1">
+ <div class="responsibleUserAutoComplete1-display watermark-block" data-bind=" visible: ResponsibleTempList().length == 0">Responsible</div>
+                            <div class="responsibleUserAutoComplete1-display" data-bind=" visible: ResponsibleTempList().length > 0, template: { name: 'ActionItemResponsibleTemplate', foreach: ResponsibleTempList }"></div>
+                             <label class="error"data-bind="validationMessage: ResponsibleTempListError"></label>
+                            
+                        </div>
+                    </div>*@
+                    <script type="text/html" id="ActionItemResponsibleTemplate" class="_responsible-inner">
+                        <div class="responsible-popup-block" data-bind="event: { mouseover: $root.ResponsibleOnMouseOver, mouseleave: $root.ResponsibleOnMouseLeave }">
+                            <div class="pull-left" data-bind=" text: ResponsibleUserName"></div>
+                            <i data-bind="click: RemoveActionItemResponsible" title="" class="fa fa-trash-o pull-right mt-xs"></i>
+                        </div>
+                    </script>
+
+
+                    <div class="form-group" id="Documents">
+                        <input type="file" value="Upload" name="fileupload" id="fileupload" />
+                        <input type="button" class="btn btn-primary mt-xs mb-xs" id="ButtonUploadUser" value="Upload Documents" />
+                         <input type="hidden" id="hdnActionItemDocumentFile"   />
+                         <input type="hidden" id="hdnActionItemDocumentName"   />
+                       @* <div data-bind="template: { name: 'AssociatedDashboardDocumentsTemplate', foreach: DashboardDocumentsList }">
+                        </div>*@
+                        <script type="text/html" id="AssociatedDashboardDocumentsTemplate">
+                            <div data-bind="event: { mouseover: DocumentMouseOver, mouseleave: DocumentMouseLeave }">
+                                <div class="col-sm-9 col-sm-offset-3">
+                                    <a class="form-control" style="cursor: pointer" data-bind="attr: { href: DownloadDocument }">
+                                        <span data-bind="text: DocumentName"></span>
+                                        <img class="pull-right" title="Delete File" data-bind="visible: DeleteDocumentVisible, click: DeleteDocument" src="/Content/images/DeleteGrey.png" height="14" width="14" />
+                                    </a>
+
+                                </div>
+                            </div>
+                        </script>
+
+                    </div>
+
+                      <div class="table-responsive" id="divdocuments" style="display:none;">
+                          <div >
+                   <h4>Documents</h4>
+               </div>
+                                <table summary="Documents" class="table table-bordered mb-none tableDocument" id="hor-zebra1" >
+                                    <thead>
+                                        <tr class="primary">
+                                            <th scope="col">Document Name</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody data-bind="template: { name: 'ActionItemDocumentsTemplate', foreach: DashboardDocumentsList }">
+                                    </tbody>
+                                    <tr class="_DocumentsNoRecord displaynone">
+                                        <td><b>No Record Found</b></td>
+                                    </tr>
+
+                                </table>
+                                <div class="pager _RCADocumentsPager marL4px"></div>
+                          <script type="text/html" id="ActionItemDocumentsTemplate">
+    <tr>
+        <td>
+            <a data-bind="text: DocumentName, attr: { href: DownloadDocument, target: '_blank' }"></a> @*extn*@
+        </td>
+         <td>
+            <label data-bind="text: Date"></label>
+        </td>
+        <td>
+            <a href="javascript:void(0)" class="permissionbased"  data-permission="@string.Concat(Constants.MODULE_Projects, Constants.PERMISSION_DELETE)" data-bind="click: DeleteDocument" title="Delete File">
+                <i class="fa fa-trash-o"></i>
+            </a>
+        </td>
+    </tr>
+</script>
+                            </div>
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <div class="col-sm-12">
+                        <a data-bind="click: $root.SaveActionItemAction" data-permission="@string.Concat(Constants.MODULE_MANAGE_ACTION_ITEM, Constants.PERMISSION_EDIT)" class="btn btn-primary permissionbased">Save</a>
+                        <a class="btn btn-default" data-bind="click: $root.CancelActionItemAction" data-dismiss="modal">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
